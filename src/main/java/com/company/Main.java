@@ -45,6 +45,10 @@ public class Main {
                     ConsoleEventsController.getInstance().printEventMonths();
                     break;
                 }
+                case 7: {
+                    ConsoleEventsController.getInstance().editEvent();
+                    break;
+                }
                 case 0: {
                     System.exit(0);
                 }
@@ -58,7 +62,8 @@ public class Main {
         menuList.add("3. Remove event");
         menuList.add("4. Save to file");
         menuList.add("5. Show events (years)");
-        menuList.add("6. Show events (months");
+        menuList.add("6. Show events (months)");
+        menuList.add("7. Edit event");
 
     }
 }

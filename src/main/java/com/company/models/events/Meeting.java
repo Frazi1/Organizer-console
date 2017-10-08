@@ -5,15 +5,17 @@ public class Meeting extends Event {
     }
 
     @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
     public String toString() {
-        return new StringBuilder()
-                .append(getId())
-                .append(". ")
-                .append(getPerson())
-                .append(" ")
-                .append(getDate())
-                .append(" ")
-                .append(getDescription())
-                .toString();
+        return getId() + ". " + "Meeting: " + super.toString();
     }
 }

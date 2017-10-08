@@ -4,8 +4,7 @@ public class Birthday extends Event {
     private String present;
     private int birthHour;
 
-    public Birthday() {
-    }
+    public Birthday() { }
 
     public String getPresent() {
         return present;
@@ -29,19 +28,29 @@ public class Birthday extends Event {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Birthday)) return false;
+        if (!super.equals(o)) return false;
+
+        Birthday birthday = (Birthday) o;
+
+        if (getBirthHour() != birthday.getBirthHour()) return false;
+        return getPresent().equals(birthday.getPresent());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + getPresent().hashCode();
+        result = 31 * result + getBirthHour();
+        return result;
+    }
+
+    @Override
     public String toString() {
-        return new StringBuilder()
-                .append(getId())
-                .append(". ")
-                .append(getPerson())
-                .append(Event.getDelimiter())
-                .append(getDescription())
-                .append(Event.getDelimiter())
-                .append(getPresent())
-                .append(Event.getDelimiter())
-                .append(getDate())
-                .append(Event.getDelimiter())
-                .append(getBirthHour())
-                .toString();
+        return  getId() + ". " + "Birthday:" + "present='" + present + '\'' +
+                ", birthHour=" + birthHour +
+                super.toString();
     }
 }

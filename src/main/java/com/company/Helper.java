@@ -8,6 +8,7 @@ import com.company.models.events.Meeting;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Scanner;
@@ -22,6 +23,13 @@ public class Helper {
 
     public static String readString() {
         return new Scanner(System.in).nextLine();
+    }
+
+    public static LocalDate parseLocalDate(String dateString) {
+        return parseDate(dateString, Event.getDatePattern())
+                .toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
     }
 
     public static Birthday createBirthdayEvent() {
@@ -44,10 +52,7 @@ public class Helper {
         //Date
         out.println("Date " + Event.getDatePattern() );
         birthday.setDate(
-                parseDate(readString(),Event.getDatePattern())
-                        .toInstant()
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDate()
+                parseLocalDate(readString())
         );
 
         //Present
@@ -73,10 +78,7 @@ public class Helper {
         //Date
         out.println("Date");
         meeting.setDate(
-                parseDate(readString(), Event.getDatePattern())
-                            .toInstant()
-                            .atZone(ZoneId.systemDefault())
-                            .toLocalDate()
+                parseLocalDate(readString())
         );
 
         return meeting;
@@ -95,5 +97,6 @@ public class Helper {
 
     public static <T> void printList(Iterable<T> iterable){
         iterable.forEach(System.out::println);
+        System.out.println();
     }
 }

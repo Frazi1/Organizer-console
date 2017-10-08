@@ -5,19 +5,14 @@ import com.company.models.events.Birthday;
 import com.company.models.events.Event;
 import com.company.models.events.Meeting;
 import com.google.gson.*;
-import com.google.gson.annotations.JsonAdapter;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;
-import java.util.Date;
+
+import static com.company.models.events.EventFields.*;
 
 public class EventAdapter implements JsonSerializer<Event>, JsonDeserializer<Event> {
-    private final String DESCRIPTION = "description";
-    private final String DATE = "date";
-    private final String PERSON = "person";
-    private final String PRESENT = "present";
-    private final String BIRTH_HOUR = "birthHour";
-    private final String ID = "id";
+
 
     @Override
     public Event deserialize(JsonElement jsonElement,
@@ -56,7 +51,6 @@ public class EventAdapter implements JsonSerializer<Event>, JsonDeserializer<Eve
         ));
 
         return result;
-
     }
 
     @Override

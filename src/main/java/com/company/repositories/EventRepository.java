@@ -20,10 +20,10 @@ public class EventRepository implements Repository<Event> {
     public EventRepository(String filePath) {
         this.events = new ArrayList<>();
         this.filePath = filePath;
-        events.addAll(loadFromFile());
+        events.addAll(loadEvents());
     }
 
-    private List<Event> loadFromFile(){
+    private List<Event> loadEvents(){
         Gson gson = Json.getGson();
         try {
             String json = readFromFile();
@@ -35,14 +35,40 @@ public class EventRepository implements Repository<Event> {
         return new ArrayList<>();
     }
 
+    private void writeToFile(String jsonString){
+        try {
+            FileWriter fileWriter = new FileWriter(filePath);
+            fileWriter.write(jsonString);
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String readFromFile() throws IOException {
+        StringBuilder jsonStringBuilder = new StringBuilder();
+        Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8)
+                .forEach(jsonStringBuilder::append);
+        return jsonStringBuilder.toString();
+    }
+
+    private void add(Integer id, Event item)
+    {
+        item.setId(id);
+        events.add(item);
+    }
+
     @Override
     public Event getItem(Integer id) {
-        return getItem(item-> Objects.equals(item.getId(), id));
+        return getItem(item-> item.getId() == id);
     }
 
     @Override
     public Event getItem(Predicate<Event> predicate) {
-        return null;
+        return events.stream()
+                .filter(predicate)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -60,21 +86,25 @@ public class EventRepository implements Repository<Event> {
 
     @Override
     public void add(Event item) {
-        item.setId(events.size() + 1);
-        events.add(item);
+        add(events.size() + 1, item);
     }
 
     @Override
-    public void remove(Integer id) {
-        events.removeIf(event -> event.getId().equals(id));
+    public void edit(Integer id, Event newObject) {
+        if(newObject.equals(getItem(id))) return;
+        remove(id);
+        add(id, newObject);
     }
 
     @Override
-    public void remove(Predicate<Event> predicate) {
-        events = events.stream()
-                .filter(predicate.negate())
-                .collect(Collectors.toList());
-//        events.forEach((event)->{if(predicate.test(event)) remove(event);});
+    public boolean remove(Integer id) {
+        return remove(event -> event.getId().equals(id));
+    }
+
+    @Override
+    public boolean remove(Predicate<Event> predicate) {
+        return events.removeIf(predicate);
+
     }
 
     @Override
@@ -83,23 +113,6 @@ public class EventRepository implements Repository<Event> {
         String json = gson.toJson(events);
         System.out.println(json);
         writeToFile(json);
-    }
-
-    private void writeToFile(String jsonString){
-        try {
-            FileWriter fileWriter = new FileWriter(filePath);
-            fileWriter.write(jsonString);
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String readFromFile() throws IOException {
-        StringBuilder jsonStringBuilder = new StringBuilder();
-            Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8)
-                                        .forEach(jsonStringBuilder::append);
-        return jsonStringBuilder.toString();
     }
 
     public List<Integer> getEventsYears() {

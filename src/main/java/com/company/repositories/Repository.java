@@ -11,9 +11,10 @@ public interface Repository<T> {
     List<T> getItems(Predicate<T> predicate);
 
     void add(T item);
+    void edit(Integer id, T newObject);
 
-    void remove(Integer id);
-    void remove(Predicate<T> predicate);
+    boolean remove(Integer id);
+    boolean remove(Predicate<T> predicate);
 
     void saveChanges();
 }

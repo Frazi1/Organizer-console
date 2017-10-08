@@ -55,5 +55,32 @@ public class Event {
         this.person = person;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Event)) return false;
 
+        Event event = (Event) o;
+
+        if (!getId().equals(event.getId())) return false;
+        if (!getDate().equals(event.getDate())) return false;
+        if (!getDescription().equals(event.getDescription())) return false;
+        return getPerson().equals(event.getPerson());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        result = 31 * result + getDate().hashCode();
+        result = 31 * result + getDescription().hashCode();
+        result = 31 * result + getPerson().hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return ", date=" + date +
+                ", description='" + description + '\'' +
+                ", person=" + person;
+    }
 }
