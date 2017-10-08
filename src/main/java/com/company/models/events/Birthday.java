@@ -31,6 +31,8 @@ public class Birthday extends Event {
     @Override
     public String toString() {
         return new StringBuilder()
+                .append(getId())
+                .append(". ")
                 .append(getPerson())
                 .append(Event.getDelimiter())
                 .append(getDescription())

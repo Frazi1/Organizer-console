@@ -1,19 +1,14 @@
 package com.company.repositories;
 
-import com.company.models.events.Birthday;
 import com.company.models.events.Event;
-import com.company.models.events.Meeting;
 import com.company.models.json.Json;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import javax.swing.tree.ExpandVetoException;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Month;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -23,18 +18,21 @@ public class EventRepository implements Repository<Event> {
     private final String filePath;
 
     public EventRepository(String filePath) {
-//        this.events = new ArrayList<Event>();
+        this.events = new ArrayList<>();
         this.filePath = filePath;
-        this.events = loadFromFile();
+        events.addAll(loadFromFile());
     }
 
     private List<Event> loadFromFile(){
         Gson gson = Json.getGson();
-        String json = readFromFile();
-        Event[] eventsArray = gson.fromJson(json, Event[].class);
-//        Arrays.stream(eventsArray)
-//                    .forEach(event -> System.out.println(event instanceof Meeting || event instanceof Birthday));
-        return Arrays.asList(eventsArray);
+        try {
+            String json = readFromFile();
+                Event[] eventsArray = gson.fromJson(json, Event[].class);
+            return Arrays.asList(eventsArray);
+        }
+        catch (IOException ignored) {
+        }
+        return new ArrayList<>();
     }
 
     @Override
@@ -62,12 +60,13 @@ public class EventRepository implements Repository<Event> {
 
     @Override
     public void add(Event item) {
+        item.setId(events.size() + 1);
         events.add(item);
     }
 
     @Override
-    public void remove(Event item) {
-        events.remove(item);
+    public void remove(Integer id) {
+        events.removeIf(event -> event.getId().equals(id));
     }
 
     @Override
@@ -96,13 +95,32 @@ public class EventRepository implements Repository<Event> {
         }
     }
 
-    private String readFromFile(){
+    private String readFromFile() throws IOException {
         StringBuilder jsonStringBuilder = new StringBuilder();
-        try {
             Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8)
                                         .forEach(jsonStringBuilder::append);
-        } catch (IOException ignored) {
-        }
         return jsonStringBuilder.toString();
+    }
+
+    public List<Integer> getEventsYears() {
+        List<Integer> years = new ArrayList<>();
+        events.forEach(e -> {
+            Integer year = e.getDate().getYear();
+            if (!years.contains(year)) {
+                years.add(year);
+            }
+        });
+        return years;
+    }
+
+    public List<Month> getEventsMonths() {
+        List<Month> months = new ArrayList<>();
+        events.forEach(e -> {
+            Month month = e.getDate().getMonth();
+            if (!months.contains(month)) {
+                months.add(month);
+            }
+        });
+        return months;
     }
 }

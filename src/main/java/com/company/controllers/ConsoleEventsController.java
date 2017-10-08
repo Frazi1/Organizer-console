@@ -4,6 +4,8 @@ import com.company.models.events.Event;
 import com.company.models.events.EventTypes;
 import com.company.repositories.EventRepository;
 
+import java.lang.reflect.Modifier;
+import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 
@@ -62,5 +64,34 @@ public class ConsoleEventsController {
 
     public void saveChanges() {
         repository.saveChanges();
+    }
+
+    public void removeEvent() {
+        printEvents();
+        System.out.println("Choose event ID");
+        int id = readInt();
+        repository.remove(id);
+        System.out.println("Removed: " + id);
+    }
+
+    public void printEventYears(){
+        List<Integer> years = repository.getEventsYears();
+        printList(years);
+        System.out.println("Input year id");
+        Integer number = readInt();
+        printList(
+                repository.getItems(event ->
+                        event.getDate().getYear() == years.get(number - 1)));
+    }
+
+    public void printEventMonths(){
+        List<Month> months = repository.getEventsMonths();
+        printList(months);
+        System.out.println("Input month id");
+        Integer number = readInt();
+        printList(
+                repository.getItems(event ->
+                event.getDate().getMonth() == months.get(number - 1))
+        );
     }
 }

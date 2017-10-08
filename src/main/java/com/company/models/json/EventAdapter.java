@@ -8,6 +8,7 @@ import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
 
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class EventAdapter implements JsonSerializer<Event>, JsonDeserializer<Event> {
@@ -39,8 +40,12 @@ public class EventAdapter implements JsonSerializer<Event>, JsonDeserializer<Eve
             result = new Meeting();
         }
 
+        result.setId(context.deserialize(
+                object.get(ID), Integer.class)
+        );
+
         result.setDate(context.deserialize(
-                        object.get(DATE), Date.class
+                        object.get(DATE), LocalDate.class
                 )
         );
         result.setDescription(context.deserialize(
@@ -58,12 +63,19 @@ public class EventAdapter implements JsonSerializer<Event>, JsonDeserializer<Eve
     public JsonElement serialize(Event event, Type type,
                                  JsonSerializationContext context) {
         JsonObject result = new JsonObject();
+
+        result.add(ID,
+                context.serialize(event.getId(), Integer.class));
+
         result.add(PERSON,
                 context.serialize(event.getPerson(), Person.class));
+
         result.add(DATE,
-                context.serialize(event.getDate(), Date.class));
+                context.serialize(event.getDate(), LocalDate.class));
+
         result.add(DESCRIPTION,
                 context.serialize(event.getDescription(), String.class));
+
         if(event instanceof Birthday){
             Birthday birthday = (Birthday) event;
             result.add(PRESENT,

@@ -30,7 +30,23 @@ public class Main {
                     break;
                 }
                 case 3: {
+                    ConsoleEventsController.getInstance().removeEvent();
+                    break;
+                }
+                case 4: {
                     ConsoleEventsController.getInstance().saveChanges();
+                    break;
+                }
+                case 5: {
+                    ConsoleEventsController.getInstance().printEventYears();
+                    break;
+                }
+                case 6: {
+                    ConsoleEventsController.getInstance().printEventMonths();
+                    break;
+                }
+                case 0: {
+                    System.exit(0);
                 }
             }
         }
@@ -39,6 +55,10 @@ public class Main {
     private static void init(List<String> menuList) {
         menuList.add("1. Add event");
         menuList.add("2. Show events");
-        menuList.add("3. Save to file");
+        menuList.add("3. Remove event");
+        menuList.add("4. Save to file");
+        menuList.add("5. Show events (years)");
+        menuList.add("6. Show events (months");
+
     }
 }

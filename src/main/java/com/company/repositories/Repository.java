@@ -12,7 +12,7 @@ public interface Repository<T> {
 
     void add(T item);
 
-    void remove(T item);
+    void remove(Integer id);
     void remove(Predicate<T> predicate);
 
     void saveChanges();

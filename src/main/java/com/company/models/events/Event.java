@@ -2,19 +2,25 @@ package com.company.models.events;
 
 import com.company.models.Person;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Event {
     private Integer id;
-    private Date date;
+    private LocalDate date;
     private String description;
     private Person person;
 
-    public Event() {
+    public static String getDatePattern(){
+        return "dd-mm-yyyy";
     }
-
     public static char getDelimiter() {
         return '\n';
+    }
+
+    public Event() {
     }
 
     public Integer getId() {
@@ -25,12 +31,12 @@ public class Event {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public LocalDate getDate() {
+        return date;
     }
 
     public String getDescription() {
@@ -49,7 +55,5 @@ public class Event {
         this.person = person;
     }
 
-    public static String getDatePattern(){
-        return "dd-mm-yyyy";
-    }
+
 }

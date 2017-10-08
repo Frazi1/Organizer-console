@@ -1,9 +1,16 @@
 [
   {
-    "date": "Jan 22, 2222 12:12:00 AM",
-    "description": "123",
+    "present": "comp",
+    "birthHour": 9,
+    "id": 1,
+    "date": {
+      "year": 2013,
+      "month": 1,
+      "day": 23
+    },
+    "description": "valera birth",
     "person": {
-      "name": "123"
+      "name": "Valera"
     }
   }
 ]
