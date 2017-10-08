@@ -28,7 +28,6 @@ public class EventRepository implements Repository<Event> {
         this.events = loadFromFile();
     }
 
-
     private List<Event> loadFromFile(){
         Gson gson = Json.getGson();
         String json = readFromFile();
