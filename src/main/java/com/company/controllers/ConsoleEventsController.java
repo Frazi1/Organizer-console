@@ -3,7 +3,7 @@ package com.company.controllers;
 import com.company.models.events.Birthday;
 import com.company.models.events.Event;
 import com.company.models.events.EventTypes;
-import com.company.repositories.EventRepository;
+import com.company.repositories.FileEventRepository;
 
 import java.time.Month;
 import java.util.Arrays;
@@ -14,13 +14,13 @@ import static com.company.Helper.*;
 import static com.company.models.events.EventFields.*;
 
 public class ConsoleEventsController {
-    private final EventRepository repository;
+    private final FileEventRepository repository;
 
     private static ConsoleEventsController instance;
     private static String filePath;
 
     private ConsoleEventsController() {
-        repository = new EventRepository(filePath);
+        repository = new FileEventRepository(filePath);
     }
 
     private void printValue(String valueName, String value) {

@@ -12,5 +12,17 @@
     "person": {
       "name": "Valera"
     }
+  },
+  {
+    "id": 2,
+    "date": {
+      "year": 17,
+      "month": 7,
+      "day": 6
+    },
+    "description": "evgeny_meeting_change",
+    "person": {
+      "name": "Evgeny_change"
+    }
   }
 ]

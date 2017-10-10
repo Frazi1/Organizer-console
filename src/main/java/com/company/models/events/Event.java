@@ -1,16 +1,23 @@
 package com.company.models.events;
 
 import com.company.models.Person;
+import org.springframework.boot.autoconfigure.web.ResourceProperties;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+@Entity
 public class Event {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     private LocalDate date;
     private String description;
+    @OneToOne
     private Person person;
 
     public static String getDatePattern(){
