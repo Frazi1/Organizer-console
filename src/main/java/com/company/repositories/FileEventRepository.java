@@ -13,11 +13,11 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class EventRepository implements Repository<Event> {
+public class FileEventRepository implements Repository<Event> {
     private List<Event> events;
     private final String filePath;
 
-    public EventRepository(String filePath) {
+    public FileEventRepository(String filePath) {
         this.events = new ArrayList<>();
         this.filePath = filePath;
         events.addAll(loadEvents());
