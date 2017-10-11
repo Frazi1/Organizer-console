@@ -1,8 +1,5 @@
 package com.company.models.events;
 
-import javax.persistence.Entity;
-
-@Entity
 public class Meeting extends Event {
     public Meeting() {
     }

@@ -99,4 +99,9 @@ public class Helper {
         iterable.forEach(System.out::println);
         System.out.println();
     }
+
+    public static void printValue(String valueName, String value) {
+        System.out.println(valueName + ": " + value);
+    }
+
 }

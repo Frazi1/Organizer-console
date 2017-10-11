@@ -1,5 +1,6 @@
 package com.company.controllers;
 
+import com.company.Helper;
 import com.company.models.events.Birthday;
 import com.company.models.events.Event;
 import com.company.models.events.EventTypes;
@@ -21,10 +22,6 @@ public class ConsoleEventsController {
 
     private ConsoleEventsController() {
         repository = new FileEventRepository(filePath);
-    }
-
-    private void printValue(String valueName, String value) {
-        System.out.println(valueName + ": " + value);
     }
 
     public static ConsoleEventsController getInstance() {
@@ -127,8 +124,7 @@ public class ConsoleEventsController {
         printList(years);
         System.out.println("Input year id");
         Integer number = readInt();
-        printList(
-                repository.getItems(event ->
+        printList(repository.getItems(event ->
                         event.getDate().getYear() == years.get(number - 1)));
     }
 

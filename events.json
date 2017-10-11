@@ -16,13 +16,25 @@
   {
     "id": 2,
     "date": {
-      "year": 17,
+      "year": 2017,
       "month": 7,
       "day": 6
     },
     "description": "evgeny_meeting_change",
     "person": {
       "name": "Evgeny_change"
+    }
+  },
+  {
+    "id": 3,
+    "date": {
+      "year": 2017,
+      "month": 1,
+      "day": 20
+    },
+    "description": "petr meeting",
+    "person": {
+      "name": "Petr"
     }
   }
 ]
