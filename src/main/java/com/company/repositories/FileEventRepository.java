@@ -27,7 +27,7 @@ public class FileEventRepository implements Repository<Event> {
         Gson gson = Json.getGson();
         try {
             String json = readFromFile();
-                Event[] eventsArray = gson.fromJson(json, Event[].class);
+            Event[] eventsArray = gson.fromJson(json, Event[].class);
             return Arrays.asList(eventsArray);
         }
         catch (IOException ignored) {
@@ -35,22 +35,6 @@ public class FileEventRepository implements Repository<Event> {
         return new ArrayList<>();
     }
 
-    private void writeToFile(String jsonString){
-        try {
-            FileWriter fileWriter = new FileWriter(filePath);
-            fileWriter.write(jsonString);
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String readFromFile() throws IOException {
-        StringBuilder jsonStringBuilder = new StringBuilder();
-        Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8)
-                .forEach(jsonStringBuilder::append);
-        return jsonStringBuilder.toString();
-    }
 
     private void add(Integer id, Event item)
     {

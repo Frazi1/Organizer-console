@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public interface Repository<T> {
-    T getItem(Integer id);
+//    T getItem(Integer id);
     T getItem(Predicate<T> predicate);
 
     List<T> getItems();
@@ -13,7 +13,7 @@ public interface Repository<T> {
     void add(T item);
     void edit(Integer id, T newObject);
 
-    boolean remove(Integer id);
+//    boolean remove(Integer id);
     boolean remove(Predicate<T> predicate);
 
     void saveChanges();
