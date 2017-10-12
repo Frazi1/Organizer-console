@@ -1,0 +1,18 @@
+<div>
+  <h2>Events</h2>
+  <ul>
+    <li *ngFor="let event of events">
+      <h3>{{event.id}}</h3>
+      <h3>{{event.description}}</h3>
+    </li>
+  </ul>
+    <div>
+      <h2>ADD MEETING</h2>
+      <label>name: </label>
+      <input [(ngModel)]="name"/>
+
+      <label>description: </label>
+      <input [(ngModel)]="description">
+      <button (click)="onAddMeeting()">Add</button>
+    </div>
+  </div>
