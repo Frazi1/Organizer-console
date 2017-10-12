@@ -34,4 +34,13 @@ public class FileHospitalRepository extends FileRepository<Hospital> {
         }
         return new ArrayList<>();
     }
+
+    public boolean removePatient(Integer id){
+        return this.getItem(hospital -> hospital
+                .getPatientIdList()
+                .stream()
+                .anyMatch(patientId -> patientId == id))
+        .removePatient(id);
+    }
+
 }

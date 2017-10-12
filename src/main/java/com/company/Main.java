@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.controllers.ConsoleEventsController;
+import com.company.controllers.ConsoleHospitalController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Main {
     private final static String filePath = "events.json";
 
     public static void main(String[] args) {
-        ConsoleEventsController.setFilePath(filePath);
+
         final List<String> menuList = new ArrayList<>();
         init(menuList);
 
@@ -22,31 +22,31 @@ public class Main {
             int commandNumber = readInt();
             switch (commandNumber) {
                 case 1: {
-                    ConsoleEventsController.getInstance().addEvent();
+                    ConsoleHospitalController.getInstance().addHospital();
                     break;
                 }
                 case 2: {
-                    ConsoleEventsController.getInstance().printEvents();
+                    ConsoleHospitalController.getInstance().addPatient();
                     break;
                 }
                 case 3: {
-                    ConsoleEventsController.getInstance().removeEvent();
+                    ConsoleHospitalController.getInstance().removePatient();
                     break;
                 }
                 case 4: {
-                    ConsoleEventsController.getInstance().saveChanges();
+                    ConsoleHospitalController.getInstance().removeHospital();
                     break;
                 }
                 case 5: {
-                    ConsoleEventsController.getInstance().printEventYears();
+                    ConsoleHospitalController.getInstance().printPatients();
                     break;
                 }
                 case 6: {
-                    ConsoleEventsController.getInstance().printEventMonths();
+                    ConsoleHospitalController.getInstance().printHospitals();
                     break;
                 }
                 case 7: {
-                    ConsoleEventsController.getInstance().editEvent();
+                    ConsoleHospitalController.getInstance().saveChanges();
                     break;
                 }
                 case 0: {
@@ -57,13 +57,13 @@ public class Main {
     }
 
     private static void init(List<String> menuList) {
-        menuList.add("1. Add event");
-        menuList.add("2. Show events");
-        menuList.add("3. Remove event");
-        menuList.add("4. Save to file");
-        menuList.add("5. Show events (years)");
-        menuList.add("6. Show events (months)");
-        menuList.add("7. Edit event");
+        menuList.add("1. Add hospital");
+        menuList.add("2. Add patient");
+        menuList.add("3. Remove patient");
+        menuList.add("4. Remove hospital");
+        menuList.add("5. Show patients");
+        menuList.add("6. Show hospitals");
+        menuList.add("7. Save to file");
 
     }
 }

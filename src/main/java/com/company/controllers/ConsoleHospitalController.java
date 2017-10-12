@@ -74,8 +74,39 @@ public class ConsoleHospitalController {
     }
 
     public void removePatient() {
-
+        printList(this.patientRepository.getItems());
+        out.println("Select id");
+        int id = readInt();
+        boolean removedFromPatientsRepository = this.patientRepository.remove(patient -> patient.getId() == id);
+        boolean removedFromHospital = this.hospitalRepository.removePatient(id);
+        if(removedFromPatientsRepository && removedFromHospital) System.out.println("Removed: " + id + "\n");
+        else System.out.println("Id " + id + " doesn't exist\n");
     }
 
+    public void removeHospital() {
+        printList(this.hospitalRepository.getItems());
+        out.println("Select id");
+        int id = readInt();
+        if(this.patientRepository.getItems(patient -> patient.getHospitalId() == id).size() > 0) {
+            out.println("Hospital is not empty");
+            return;
+        }
+        boolean removed = this.hospitalRepository.remove(hospital -> hospital.getId() == id);
+        if(removed){
+            out.println("Removed: " + id);
+        }
+    }
 
+    public void printPatients() {
+        printList(this.patientRepository.getItems());
+    }
+
+    public void printHospitals(){
+        printList(this.hospitalRepository.getItems());
+    }
+
+    public void saveChanges() {
+        this.hospitalRepository.saveChanges();
+        this.patientRepository.saveChanges();
+    }
 }

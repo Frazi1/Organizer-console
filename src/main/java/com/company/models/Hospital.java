@@ -37,6 +37,10 @@ public class Hospital {
         patientIdList.add(patientId);
     }
 
+    public boolean removePatient(Integer id) {
+        return patientIdList.removeIf(pId -> pId == id);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

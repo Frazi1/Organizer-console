@@ -9,4 +9,6 @@ public class Constants {
     public static final String SEX = "sex";
     public static final String AGE = "age";
     public static final String HOSPITAL_ID = "hospital id";
+
+    public static final String DATE_PATTERN = "dd-mm-yyyy";
 }
