@@ -4,7 +4,7 @@ import "rxjs/add/operator/toPromise";
 
 const baseUrl = 'http://localhost:8080/api/events/';
 
-class Person {
+export class Person {
   name: string;
 }
 
@@ -37,17 +37,23 @@ export class EventsService {
       .catch(this.handleError)
   }
 
-  addMeeting(name: string, description: string) {
-    let meeting : MeetingEvent = new MeetingEvent;
-    meeting.description = description;
-    let person : Person = new Person;
-    person.name = name;
-    meeting.person = person;
-    //TODO: do something
-    // let result = this.http.get(this.addMeetingUrl, meeting.).toPromise();
-    console.log(result);
-    return result;
-  }
+  // addMeeting(name: string, description: string) {
+  //   let meeting : MeetingEvent = new MeetingEvent;
+  //   meeting.description = description;
+  //   let person : Person = new Person;
+  //   person.name = name;
+  //   meeting.person = person;
+  //   //TODO: do something
+  //   // let result = this.http.get(this.addMeetingUrl, meeting.).toPromise();
+  //   console.log(result);
+  //   return result;
+  // }
+    addMeeting(meeting: MeetingEvent) {
+    return this.http.post(this.addMeetingUrl, meeting)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError)
+    }
 
   private handleError(error: any): Promise<any> {
     console.error('Error occured: ', error);

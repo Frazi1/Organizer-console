@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {EventsService, OrganizerEvent} from "../../services/events.service";
+import {EventsService, MeetingEvent, OrganizerEvent, Person} from "../../services/events.service";
 
 @Component({
   selector: 'app-events',
@@ -8,14 +8,14 @@ import {EventsService, OrganizerEvent} from "../../services/events.service";
 })
 export class EventsComponent implements OnInit {
 
-  @Input() name: string;
-  @Input() description: string;
-
+  @Input() meeting: MeetingEvent = new MeetingEvent;
+  @Input() person: Person = new Person;
   events: OrganizerEvent[];
+
   constructor(private eventsService: EventsService) { }
 
   onAddMeeting(){
-    this.eventsService.addMeeting(this.name, this.description);
+    this.eventsService.addMeeting(this.meeting);
   }
   ngOnInit() {
     this.eventsService.getMeeting().then(events => {

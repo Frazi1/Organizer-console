@@ -9,10 +9,14 @@
     <div>
       <h2>ADD MEETING</h2>
       <label>name: </label>
-      <input [(ngModel)]="name"/>
+      <label>
+        <input [(ngModel)]="person.name"/>
+      </label>
 
       <label>description: </label>
-      <input [(ngModel)]="description">
+      <label>
+        <input [(ngModel)]="meeting.description">
+      </label>
       <button (click)="onAddMeeting()">Add</button>
     </div>
   </div>
