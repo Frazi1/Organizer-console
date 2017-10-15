@@ -51,7 +51,7 @@ export class EventsService {
     addMeeting(meeting: MeetingEvent) {
     return this.http.post(this.addMeetingUrl, meeting)
       .toPromise()
-      .then(response => response.json())
+      .then(response => {console.log(response.json()); return response.json();})
       .catch(this.handleError)
     }
 

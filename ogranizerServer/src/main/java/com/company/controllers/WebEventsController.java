@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.company.Config.SERVER_PATH;
+
 @RestController
 @RequestMapping("api/events")
+@CrossOrigin(origins = SERVER_PATH)
 public class WebEventsController {
-    private static final String SERVER_PATH = "http://localhost:4200";
 
     private final DbMeetingRepository dbMeetingRepository;
     private final DbPersonRepository dbPersonRepository;
@@ -41,15 +43,14 @@ public class WebEventsController {
 //        dbMeetingRepository.save(e);
 //        return ResponseEntity.noContent().build();
 //    }
-    @CrossOrigin(origins = SERVER_PATH)
     @RequestMapping("addMeeting")
-    public ResponseEntity<?> addMeetingEvent(@ModelAttribute("MeetingEvent") Meeting meeting){
+    public ResponseEntity<?> addMeetingEvent(@RequestBody Meeting meeting){
+        meeting.setId(null);
         this.dbMeetingRepository.save(meeting);
         return ResponseEntity.accepted().body(meeting);
     }
 
 
-    @CrossOrigin(origins = SERVER_PATH)
     @RequestMapping("addBirthday")
     public ResponseEntity<?> addBirthdayEvent(@RequestParam String person,
                                               @RequestParam String description,
@@ -68,13 +69,11 @@ public class WebEventsController {
         return ResponseEntity.noContent().build();
     }
 
-    @CrossOrigin(origins = SERVER_PATH)
     @RequestMapping("getBirthday")
     public Iterable<Birthday> getBirthday(){
         return dbBirthdayRepository.findAll();
     }
 
-    @CrossOrigin(origins = SERVER_PATH)
     @RequestMapping("getMeeting")
     public Iterable<Meeting> getMeeting() {
         return dbMeetingRepository.findAll();

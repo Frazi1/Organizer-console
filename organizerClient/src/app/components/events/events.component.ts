@@ -8,7 +8,13 @@ import {EventsService, MeetingEvent, OrganizerEvent, Person} from "../../service
 })
 export class EventsComponent implements OnInit {
 
-  @Input() meeting: MeetingEvent = new MeetingEvent;
+  @Input() meeting: MeetingEvent = {
+      id: 0,
+      person: {
+        name: ""
+      },
+      description: ""
+  };
   @Input() person: Person = new Person;
   events: OrganizerEvent[];
 
@@ -23,5 +29,4 @@ export class EventsComponent implements OnInit {
       // console.log(events[0].person.name);
     });
   }
-
 }
