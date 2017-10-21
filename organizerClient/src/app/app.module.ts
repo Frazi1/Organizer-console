@@ -11,7 +11,7 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {RoutingModule} from "./modules/routing/routing.module";
 import {HttpModule} from "@angular/http";
 import { EventsComponent } from './components/events/events.component';
-import {EventsService} from "./services/events.service";
+import {EventsService} from "./services/events-service/events.service";
 
 
 
