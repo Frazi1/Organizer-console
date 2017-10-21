@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Http} from "@angular/http";
 import "rxjs/add/operator/toPromise";
-import {MeetingEvent} from "./Model/MeetingEvent";
 import {MeetingEventModel} from "./Model/EventModel/MeetingEventModel";
+import {ModelConverterService} from "../model-converter-service/model-converter-service.service";
+import {MeetingEvent} from "./Model/MeetingEvent";
+import {OrganizerEvent} from "./Model/OrganizerEvent";
 
 const baseUrl = 'http://localhost:8080/api/events/';
 
@@ -10,25 +12,38 @@ const baseUrl = 'http://localhost:8080/api/events/';
 export class EventsService {
   private meetingUrl = baseUrl + 'meeting';
 
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+              private converter: ModelConverterService) {
+  }
 
-  getMeeting(): Promise<MeetingEventModel[]>{
+  public getMeeting(): Promise<MeetingEvent[]> {
     return this.http.get(this.meetingUrl)
       .toPromise()
-      .then(response => (response.json() as MeetingEventModel[]))
+      .then(response =>
+        this.converter.getMeetingEventsArray(response.json() as MeetingEventModel[]))
       .catch(this.handleError)
   }
 
-    addMeeting(meeting: MeetingEventModel)   {
+  public addMeeting(meeting: MeetingEvent) {
     console.log(meeting);
-    return this.http.post(this.meetingUrl, meeting)
+    return this.http.post(this.meetingUrl,
+                          this.converter.getMeetingEventModel(meeting))
       .toPromise()
-      .then(response => {console.log(response.json()); return response.json();})
+      .then(response => {
+        console.log(response.json());
+        return response.json();
+      })
       .catch(this.handleError)
-    }
+  }
 
   private handleError(error: any): Promise<any> {
     console.error('Error occured: ', error);
     return Promise.reject(error.message | error);
+  }
+
+  public removeEvent(organizerEvent: OrganizerEvent) {
+    return this.http.delete(this.meetingUrl + `/${organizerEvent.id}`)
+      .toPromise()
+      .catch(this.handleError);
   }
 }

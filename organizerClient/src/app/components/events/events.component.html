@@ -2,23 +2,28 @@
   <h2>Events</h2>
   <ul>
     <li class="events-list" *ngFor="let event of events">
-      <span>{{event.id}}</span>
-      <span>{{event.person.name}}</span>
-      <span>{{event.description}}</span>
-      <span>{{event.date}}</span>
+      <div>
+        <span>{{event.id}}</span>
+        <span>{{event.person.name}}</span>
+        <span>{{event.description}}</span>
+        <span>{{event.date}}</span>
+      </div>
+      <div>
+        <button (click)="removeEvent(event)">Remove</button>
+      </div>
     </li>
   </ul>
-    <div>
-      <h2>ADD MEETING</h2>
-      <label>name: </label>
-      <label>
-        <input [(ngModel)]="meeting.person.name"/>
-      </label>
+  <div>
+    <h2>ADD MEETING</h2>
+    <label>name: </label>
+    <label>
+      <input [(ngModel)]="meeting.person.name"/>
+    </label>
 
-      <label>description: </label>
-      <label>
-        <input [(ngModel)]="meeting.description">
-      </label>
-      <button (click)="onAddMeeting()">Add</button>
-    </div>
+    <label>description: </label>
+    <label>
+      <input [(ngModel)]="meeting.description">
+    </label>
+    <button (click)="onAddMeeting()">Add</button>
   </div>
+</div>

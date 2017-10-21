@@ -12,6 +12,7 @@ import {RoutingModule} from "./modules/routing/routing.module";
 import {HttpModule} from "@angular/http";
 import { EventsComponent } from './components/events/events.component';
 import {EventsService} from "./services/events-service/events.service";
+import {ModelConverterService} from "./services/model-converter-service/model-converter-service.service";
 
 
 
@@ -29,7 +30,11 @@ import {EventsService} from "./services/events-service/events.service";
     RoutingModule,
     HttpModule
   ],
-  providers: [HeroService, EventsService],
+  providers: [
+    HeroService,
+    EventsService,
+    ModelConverterService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

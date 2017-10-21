@@ -2,9 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {EventsService} from "../../services/events-service/events.service";
 import {Person} from "../../services/events-service/Model/Person";
 import {MeetingEventModel} from "../../services/events-service/Model/EventModel/MeetingEventModel";
-import {OrganizerEventModel} from "../../services/events-service/Model/EventModel/OrganizerEventModel";
-import {MeetingEvent} from "../../services/events-service/Model/MeetingEvent";
 import {OrganizerEvent} from "../../services/events-service/Model/OrganizerEvent";
+import {MeetingEvent} from "../../services/events-service/Model/MeetingEvent";
 
 @Component({
   selector: 'app-events',
@@ -12,17 +11,20 @@ import {OrganizerEvent} from "../../services/events-service/Model/OrganizerEvent
   styleUrls: ['./events.component.css']
 })
 export class EventsComponent implements OnInit {
+
+  public events: OrganizerEvent[];
+
   @Input()
-  person: Person = new Person;
-  private events: OrganizerEvent[];
+  public person: Person = new Person;
+
   @Input()
-  private meeting: MeetingEventModel = {
+  public meeting: MeetingEvent = {
     id: null,
     person: {
       name: ""
     },
     description: "",
-    date: Date.now()
+    date: new Date(Date.now())
   };
 
   constructor(private eventsService: EventsService) {
@@ -30,25 +32,19 @@ export class EventsComponent implements OnInit {
 
   onAddMeeting() {
     this.eventsService.addMeeting(this.meeting);
+    this.update()
+  }
+
+  removeEvent(organizerEvent: OrganizerEvent){
+    this.eventsService.removeEvent(organizerEvent);
+    this.update()
   }
 
   ngOnInit() {
-    this.eventsService.getMeeting().then(events => {
-      this.events = [];
-      events.forEach(value => {
-        return this.events.push(this.getMeetingEvent(value));
-      })
-    });
+    this.update();
   }
 
-  private getMeetingEvent(meetingEventModel: MeetingEventModel): MeetingEvent {
-    return {
-      id: meetingEventModel.id,
-      person: {
-        name: meetingEventModel.person.name
-      },
-      description: meetingEventModel.description,
-      date: new Date(meetingEventModel.date)
-    };
+  private update() {
+    this.eventsService.getMeeting().then(events => this.events = events);
   }
 }

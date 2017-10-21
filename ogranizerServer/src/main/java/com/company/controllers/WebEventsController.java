@@ -1,6 +1,5 @@
 package com.company.controllers;
 
-import com.company.models.Person;
 import com.company.models.events.Meeting;
 import com.company.repositories.DbBirthdayRepository;
 import com.company.repositories.DbMeetingRepository;
@@ -10,8 +9,6 @@ import org.hibernate.annotations.CascadeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.Instant;
 
 import static com.company.Config.MEETING_PATH;
 import static com.company.Config.SERVER_PATH;
@@ -46,15 +43,9 @@ public class WebEventsController {
         return dbMeetingRepository.findAll();
     }
 
-    @RequestMapping(value = "meeting1", method = RequestMethod.GET)
-    public String testMeeting() {
-        Meeting m = new Meeting();
-        Person p = new Person();
-        p.setName("Valera");
-        m.setPerson(p);
-        m.setDescription("test meeting");
-        m.setDate(Instant.now().getEpochSecond());
-        dbMeetingRepository.save(m);
-        return m.toString();
+    @RequestMapping(value = MEETING_PATH + "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> removeMeeting(@PathVariable Integer id) {
+        this.dbMeetingRepository.delete(id);
+        return ResponseEntity.ok().build();
     }
 }
