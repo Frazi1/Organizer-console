@@ -4,11 +4,12 @@ import {HeroDetailComponent} from "../../components/hero-detail/hero-detail.comp
 import {DashboardComponent} from "../../components/dashboard/dashboard.component";
 import {HeroesComponent} from "../../components/heroes/heroes.component";
 import {EventsComponent} from "../../components/events/events.component";
+import {EditMeetingEventComponent} from "../../components/edit-meeting-event/edit-meeting-event.component";
 
 const routes = [{
   path: 'heroes',
   component: HeroesComponent
-  },
+},
   {
     path: 'dashboard',
     component: DashboardComponent
@@ -25,11 +26,15 @@ const routes = [{
   {
     path: 'events',
     component: EventsComponent
+  },
+  {
+    path: 'meeting/:id',
+    component: EditMeetingEventComponent
   }
-  ];
+];
 
 @NgModule({
-  imports:[
+  imports: [
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]

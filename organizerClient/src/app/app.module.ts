@@ -13,7 +13,7 @@ import {HttpModule} from "@angular/http";
 import { EventsComponent } from './components/events/events.component';
 import {EventsService} from "./services/events-service/events.service";
 import {ModelConverterService} from "./services/model-converter-service/model-converter-service.service";
-
+import { EditMeetingEventComponent } from './components/edit-meeting-event/edit-meeting-event.component';
 
 
 @NgModule({
@@ -22,7 +22,8 @@ import {ModelConverterService} from "./services/model-converter-service/model-co
     HeroDetailComponent,
     HeroesComponent,
     DashboardComponent,
-    EventsComponent
+    EventsComponent,
+    EditMeetingEventComponent
   ],
   imports: [
     BrowserModule,

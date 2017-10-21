@@ -16,7 +16,15 @@ export class EventsService {
               private converter: ModelConverterService) {
   }
 
-  public getMeeting(): Promise<MeetingEvent[]> {
+
+  public getMeeting(id: number): Promise<MeetingEvent> {
+    return this.http.get(this.meetingUrl + `/${id}`)
+      .toPromise()
+      .then(response => this.converter.getMeetingEvent(response.json()))
+      .catch(this.handleError);
+  }
+
+  public getMeetings(): Promise<MeetingEvent[]> {
     return this.http.get(this.meetingUrl)
       .toPromise()
       .then(response =>
@@ -43,6 +51,12 @@ export class EventsService {
 
   public removeEvent(organizerEvent: OrganizerEvent) : Promise<OrganizerEvent> {
     return this.http.delete(this.meetingUrl + `/${organizerEvent.id}`)
+      .toPromise()
+      .catch(this.handleError);
+  }
+
+  updateMeeting(meetingEvent: MeetingEvent) {
+    return this.http.put(this.meetingUrl + `/${meetingEvent.id}`, this.converter.getMeetingEventModel(meetingEvent))
       .toPromise()
       .catch(this.handleError);
   }

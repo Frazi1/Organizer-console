@@ -38,6 +38,11 @@ public class WebEventsController {
         return ResponseEntity.accepted().body(meeting);
     }
 
+    @RequestMapping(value = MEETING_PATH + "/{id}", method = RequestMethod.GET)
+    public Meeting getMeeting(@PathVariable Integer id) {
+        return dbMeetingRepository.findOne(id);
+    }
+
     @RequestMapping(value = MEETING_PATH, method = RequestMethod.GET)
     public Iterable<Meeting> getMeeting() {
         return dbMeetingRepository.findAll();
@@ -47,5 +52,15 @@ public class WebEventsController {
     public ResponseEntity<?> removeMeeting(@PathVariable Integer id) {
         this.dbMeetingRepository.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @RequestMapping(value = MEETING_PATH + "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateMeeting(@RequestBody Meeting meeting,@PathVariable Integer id) {
+        Meeting savedMeeting  = this.dbMeetingRepository.findOne(id);
+        savedMeeting.setDescription(meeting.getDescription());
+        savedMeeting.setPerson(meeting.getPerson());
+        savedMeeting.setDate(meeting.getDate());
+        this.dbMeetingRepository.save(savedMeeting);
+        return ResponseEntity.ok(savedMeeting);
     }
 }

@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EventsService} from "../../services/events-service/events.service";
 import {Person} from "../../services/events-service/Model/Person";
-import {MeetingEventModel} from "../../services/events-service/Model/EventModel/MeetingEventModel";
 import {OrganizerEvent} from "../../services/events-service/Model/OrganizerEvent";
 import {MeetingEvent} from "../../services/events-service/Model/MeetingEvent";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-events',
@@ -27,7 +27,8 @@ export class EventsComponent implements OnInit {
     date: new Date(Date.now())
   };
 
-  constructor(private eventsService: EventsService) {
+  constructor(private eventsService: EventsService,
+              private router: Router) {
   }
 
   onAddMeeting() {
@@ -46,6 +47,10 @@ export class EventsComponent implements OnInit {
   }
 
   private update() {
-    this.eventsService.getMeeting().then(events => this.events = events);
+    this.eventsService.getMeetings().then(events => this.events = events);
+  }
+
+  public goToEditPage(meetingEvent: MeetingEvent) {
+    this.router.navigate(['/meeting', meetingEvent.id]);
   }
 }
