@@ -41,7 +41,7 @@ export class EventsService {
     return Promise.reject(error.message | error);
   }
 
-  public removeEvent(organizerEvent: OrganizerEvent) {
+  public removeEvent(organizerEvent: OrganizerEvent) : Promise<OrganizerEvent> {
     return this.http.delete(this.meetingUrl + `/${organizerEvent.id}`)
       .toPromise()
       .catch(this.handleError);

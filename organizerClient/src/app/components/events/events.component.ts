@@ -31,13 +31,14 @@ export class EventsComponent implements OnInit {
   }
 
   onAddMeeting() {
-    this.eventsService.addMeeting(this.meeting);
-    this.update()
+    this.eventsService.addMeeting(this.meeting)
+      .then(value => this.update());
+
   }
 
   removeEvent(organizerEvent: OrganizerEvent){
-    this.eventsService.removeEvent(organizerEvent);
-    this.update()
+    this.eventsService.removeEvent(organizerEvent)
+      .then(value => this.update());
   }
 
   ngOnInit() {
