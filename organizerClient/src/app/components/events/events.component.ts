@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {EventsService} from "../../services/events-service/events.service";
 import {Person} from "../../services/events-service/Model/Person";
 import {OrganizerEvent} from "../../services/events-service/Model/OrganizerEvent";
-import {MeetingEvent} from "../../services/events-service/Model/MeetingEvent";
 import {Router} from "@angular/router";
 
 @Component({
@@ -18,21 +17,25 @@ export class EventsComponent implements OnInit {
   public person: Person = new Person;
 
   @Input()
-  public meeting: MeetingEvent = {
+  public event: OrganizerEvent = {
     id: null,
     person: {
       name: ""
     },
     description: "",
-    date: new Date(Date.now())
+    date: new Date(Date.now()),
+    birthHour: null,
+    present: "",
+    eventType: "null"
   };
 
   constructor(private eventsService: EventsService,
               private router: Router) {
   }
 
-  onAddMeeting() {
-    this.eventsService.addMeeting(this.meeting)
+  addMeeting() {
+    this.event.eventType = "Birthday";
+    this.eventsService.addEvent(this.event)
       .then(value => this.update());
 
   }
@@ -47,10 +50,10 @@ export class EventsComponent implements OnInit {
   }
 
   private update() {
-    this.eventsService.getMeetings().then(events => this.events = events);
+    this.eventsService.getEvents().then(events => this.events = events);
   }
 
-  public goToEditPage(meetingEvent: MeetingEvent) {
-    this.router.navigate(['/meeting', meetingEvent.id]);
+  public goToEditPage(event: OrganizerEvent) {
+    this.router.navigate(['/event', event.id]);
   }
 }

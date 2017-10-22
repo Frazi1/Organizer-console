@@ -1,9 +1,6 @@
-import {Person} from "./Person";
+import {OrganizerEventBase} from "./OrganizerEventBase";
 
 
-export abstract class OrganizerEvent {
-  id: number;
-  person: Person;
-  description: string;
-  date: Date
+export class OrganizerEvent extends OrganizerEventBase{
+  date: Date;
 }

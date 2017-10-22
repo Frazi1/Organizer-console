@@ -1,8 +1,7 @@
 package com.company.controllers;
 
-import com.company.models.events.Meeting;
-import com.company.repositories.DbBirthdayRepository;
-import com.company.repositories.DbMeetingRepository;
+import com.company.models.events.Event;
+import com.company.repositories.DbEventsRepository;
 import com.company.repositories.DbPersonRepository;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -10,57 +9,54 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static com.company.Config.MEETING_PATH;
-import static com.company.Config.SERVER_PATH;
+import static com.company.Config.*;
 
 @RestController
-@RequestMapping("api/events")
-@CrossOrigin(origins = SERVER_PATH)
+@RequestMapping(API_EVENTS)
+@CrossOrigin(origins = CLIENT_URL)
 public class WebEventsController {
 
-    private final DbMeetingRepository dbMeetingRepository;
     private final DbPersonRepository dbPersonRepository;
-    private final DbBirthdayRepository dbBirthdayRepository;
+    private final DbEventsRepository dbEventsRepository;
 
     @Autowired
-    public WebEventsController(DbMeetingRepository dbMeetingRepository,
-                               DbPersonRepository dbPersonRepository,
-                               DbBirthdayRepository dbBirthdayRepository) {
-        this.dbMeetingRepository = dbMeetingRepository;
+    public WebEventsController(DbPersonRepository dbPersonRepository,
+                               DbEventsRepository dbEventsRepository) {
         this.dbPersonRepository = dbPersonRepository;
-        this.dbBirthdayRepository = dbBirthdayRepository;
+        this.dbEventsRepository = dbEventsRepository;
     }
 
-    @RequestMapping(value = MEETING_PATH, method = RequestMethod.POST)
+    @RequestMapping( method = RequestMethod.POST)
     @Cascade(CascadeType.ALL)
-    public ResponseEntity<?> addMeetingEvent(@RequestBody Meeting meeting){
-        this.dbMeetingRepository.save(meeting);
-        return ResponseEntity.accepted().body(meeting);
+    public ResponseEntity<?> addEvent(@RequestBody Event event){
+        this.dbEventsRepository.save(event);
+        return ResponseEntity.accepted().body(event);
+    }
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Event getEvent(@PathVariable Integer id) {
+        return dbEventsRepository.findOne(id);
     }
 
-    @RequestMapping(value = MEETING_PATH + "/{id}", method = RequestMethod.GET)
-    public Meeting getMeeting(@PathVariable Integer id) {
-        return dbMeetingRepository.findOne(id);
+    @RequestMapping(method = RequestMethod.GET)
+    public Iterable<Event> getEvent() {
+        return dbEventsRepository.findAll();
     }
 
-    @RequestMapping(value = MEETING_PATH, method = RequestMethod.GET)
-    public Iterable<Meeting> getMeeting() {
-        return dbMeetingRepository.findAll();
-    }
-
-    @RequestMapping(value = MEETING_PATH + "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> removeMeeting(@PathVariable Integer id) {
-        this.dbMeetingRepository.delete(id);
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> removeEvent(@PathVariable Integer id) {
+        this.dbEventsRepository.delete(id);
         return ResponseEntity.ok().build();
     }
 
-    @RequestMapping(value = MEETING_PATH + "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateMeeting(@RequestBody Meeting meeting,@PathVariable Integer id) {
-        Meeting savedMeeting  = this.dbMeetingRepository.findOne(id);
-        savedMeeting.setDescription(meeting.getDescription());
-        savedMeeting.getPerson().setName(meeting.getPerson().getName());
-        savedMeeting.setDate(meeting.getDate());
-        this.dbMeetingRepository.save(savedMeeting);
-        return ResponseEntity.ok(savedMeeting);
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateEvent(@RequestBody Event event,@PathVariable Integer id) {
+        Event savedEvent  = this.dbEventsRepository.findOne(id);
+        savedEvent.setDescription(event.getDescription());
+        savedEvent.getPerson().setName(event.getPerson().getName());
+        savedEvent.setDate(event.getDate());
+        savedEvent.setBirthHour(event.getBirthHour());
+        savedEvent.setPresent(event.getPresent());
+        this.dbEventsRepository.save(savedEvent);
+        return ResponseEntity.ok(savedEvent);
     }
 }

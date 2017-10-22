@@ -3,5 +3,5 @@ export const STATES = {
   DASH_BOARD: 'dashboard',
   DETAIL: 'detail',
   EVENTS: 'events',
-  MEETING: 'meeting'
+  MEETING: 'event'
 };

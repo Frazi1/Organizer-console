@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EventsService} from "../../services/events-service/events.service";
-import {MeetingEvent} from "../../services/events-service/Model/MeetingEvent";
 import {Location} from "@angular/common";
 import {ActivatedRoute, ParamMap} from "@angular/router";
+import {OrganizerEvent} from "../../services/events-service/Model/OrganizerEvent";
 
 @Component({
   selector: 'app-edit-meeting-event',
@@ -12,7 +12,7 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
 export class EditMeetingEventComponent implements OnInit {
 
   @Input()
-  public meetingEvent: MeetingEvent;
+  public event: OrganizerEvent;
 
   constructor(private eventsService: EventsService,
               private location: Location,
@@ -21,15 +21,15 @@ export class EditMeetingEventComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.switchMap((params: ParamMap) =>
-      this.eventsService.getMeeting(+params.get('id')))
+      this.eventsService.getEvent(+params.get('id')))
       .subscribe(result => {
         console.log(result);
-        this.meetingEvent = result
+        this.event = result
       });
   }
 
   public updateEvent(): void {
-    this.eventsService.updateMeeting(this.meetingEvent);
+    this.eventsService.updateEvent(this.event);
     this.goBack();
   }
 

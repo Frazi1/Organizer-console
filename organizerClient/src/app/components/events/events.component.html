@@ -18,13 +18,13 @@
     <h2>ADD MEETING</h2>
     <label>name: </label>
     <label>
-      <input [(ngModel)]="meeting.person.name"/>
+      <input [(ngModel)]="event.person.name"/>
     </label>
 
     <label>description: </label>
     <label>
-      <input [(ngModel)]="meeting.description">
+      <input [(ngModel)]="event.description">
     </label>
-    <button (click)="onAddMeeting()">Add</button>
+    <button (click)="addMeeting()">Add</button>
   </div>
 </div>
