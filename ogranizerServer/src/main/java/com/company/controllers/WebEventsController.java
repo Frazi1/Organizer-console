@@ -58,7 +58,7 @@ public class WebEventsController {
     public ResponseEntity<?> updateMeeting(@RequestBody Meeting meeting,@PathVariable Integer id) {
         Meeting savedMeeting  = this.dbMeetingRepository.findOne(id);
         savedMeeting.setDescription(meeting.getDescription());
-        savedMeeting.setPerson(meeting.getPerson());
+        savedMeeting.getPerson().setName(meeting.getPerson().getName());
         savedMeeting.setDate(meeting.getDate());
         this.dbMeetingRepository.save(savedMeeting);
         return ResponseEntity.ok(savedMeeting);

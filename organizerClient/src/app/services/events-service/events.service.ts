@@ -6,11 +6,12 @@ import {ModelConverterService} from "../model-converter-service/model-converter-
 import {MeetingEvent} from "./Model/MeetingEvent";
 import {OrganizerEvent} from "./Model/OrganizerEvent";
 
-const baseUrl = 'http://localhost:8080/api/events/';
+const END_POINT = 'http://localhost:8080/'
+const BASE_URL = END_POINT + 'api/events/';
+const MEETING_URL = BASE_URL + 'meeting/';
 
 @Injectable()
 export class EventsService {
-  private meetingUrl = baseUrl + 'meeting';
 
   constructor(private http: Http,
               private converter: ModelConverterService) {
@@ -18,14 +19,14 @@ export class EventsService {
 
 
   public getMeeting(id: number): Promise<MeetingEvent> {
-    return this.http.get(this.meetingUrl + `/${id}`)
+    return this.http.get(MEETING_URL + id)
       .toPromise()
       .then(response => this.converter.getMeetingEvent(response.json()))
       .catch(this.handleError);
   }
 
   public getMeetings(): Promise<MeetingEvent[]> {
-    return this.http.get(this.meetingUrl)
+    return this.http.get(MEETING_URL)
       .toPromise()
       .then(response =>
         this.converter.getMeetingEventsArray(response.json() as MeetingEventModel[]))
@@ -34,7 +35,7 @@ export class EventsService {
 
   public addMeeting(meeting: MeetingEvent) {
     console.log(meeting);
-    return this.http.post(this.meetingUrl,
+    return this.http.post(MEETING_URL,
                           this.converter.getMeetingEventModel(meeting))
       .toPromise()
       .then(response => {
@@ -50,13 +51,13 @@ export class EventsService {
   }
 
   public removeEvent(organizerEvent: OrganizerEvent) : Promise<OrganizerEvent> {
-    return this.http.delete(this.meetingUrl + `/${organizerEvent.id}`)
+    return this.http.delete(MEETING_URL + organizerEvent.id)
       .toPromise()
       .catch(this.handleError);
   }
 
   updateMeeting(meetingEvent: MeetingEvent) {
-    return this.http.put(this.meetingUrl + `/${meetingEvent.id}`, this.converter.getMeetingEventModel(meetingEvent))
+    return this.http.put(MEETING_URL + meetingEvent.id, this.converter.getMeetingEventModel(meetingEvent))
       .toPromise()
       .catch(this.handleError);
   }

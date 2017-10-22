@@ -10,10 +10,10 @@ import {HeroesComponent} from "./components/heroes/heroes.component";
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {RoutingModule} from "./modules/routing/routing.module";
 import {HttpModule} from "@angular/http";
-import { EventsComponent } from './components/events/events.component';
+import {EventsComponent} from './components/events/events.component';
 import {EventsService} from "./services/events-service/events.service";
 import {ModelConverterService} from "./services/model-converter-service/model-converter-service.service";
-import { EditMeetingEventComponent } from './components/edit-meeting-event/edit-meeting-event.component';
+import {EditMeetingEventComponent} from './components/edit-meeting-event/edit-meeting-event.component';
 
 
 @NgModule({

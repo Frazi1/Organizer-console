@@ -1,10 +1,12 @@
 <div>
   <h1>Edit Meeting:</h1>
-  <label>Person name:</label>
-  <input [(ngModel)]="meetingEvent.person.name">
-  <label>Description:</label>
-  <input [(ngModel)]="meetingEvent.description">
-  <!--TODO: date-->
-  <br>
-  <button (click)="updateEvent()">Save</button>
+  <div *ngIf="meetingEvent">
+    <label>Person name:</label>
+    <input [(ngModel)]="meetingEvent.person.name">
+    <label>Description:</label>
+    <input [(ngModel)]="meetingEvent.description">
+    <!--TODO: date-->
+    <br>
+    <button (click)="updateEvent()">Save</button>
+  </div>
 </div>

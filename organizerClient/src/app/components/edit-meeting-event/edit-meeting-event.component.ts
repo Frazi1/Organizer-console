@@ -12,14 +12,7 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
 export class EditMeetingEventComponent implements OnInit {
 
   @Input()
-  public meetingEvent: MeetingEvent = {
-    id: null,
-    description: "",
-    person: {
-      name: ""
-    },
-    date: null
-  };
+  public meetingEvent: MeetingEvent;
 
   constructor(private eventsService: EventsService,
               private location: Location,
