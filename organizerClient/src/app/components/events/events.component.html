@@ -1,0 +1,30 @@
+<div>
+  <h2>Events</h2>
+  <ul>
+    <li class="events-list" *ngFor="let event of events">
+      <div>
+        <span>{{event.id}}</span>
+        <span>{{event.person.name}}</span>
+        <span>{{event.description}}</span>
+        <span>{{event.date}}</span>
+      </div>
+      <div>
+        <button (click)="removeEvent(event)">Remove</button>
+        <button (click)="goToEditPage(event)">Edit</button>
+      </div>
+    </li>
+  </ul>
+  <div>
+    <h2>ADD MEETING</h2>
+    <label>name: </label>
+    <label>
+      <input [(ngModel)]="event.person.name"/>
+    </label>
+
+    <label>description: </label>
+    <label>
+      <input [(ngModel)]="event.description">
+    </label>
+    <button (click)="addMeeting()">Add</button>
+  </div>
+</div>
