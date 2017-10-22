@@ -1,13 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EventsService} from "../../services/events-service/events.service";
 import {Location} from "@angular/common";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {OrganizerEvent} from "../../services/events-service/Model/OrganizerEvent";
+import {STATES} from "../../modules/routing/states";
 
 @Component({
   selector: 'app-edit-meeting-event',
-  templateUrl: './edit-meeting-event.component.html',
-  styleUrls: ['./edit-meeting-event.component.css']
+  templateUrl: './edit-event.component.html',
+  styleUrls: ['./edit-event.component.css']
 })
 export class EditMeetingEventComponent implements OnInit {
 
@@ -16,7 +17,8 @@ export class EditMeetingEventComponent implements OnInit {
 
   constructor(private eventsService: EventsService,
               private location: Location,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -30,7 +32,11 @@ export class EditMeetingEventComponent implements OnInit {
 
   public updateEvent(): void {
     this.eventsService.updateEvent(this.event);
-    this.goBack();
+    this.goToEvents();
+  }
+
+  public goToEvents(): void {
+    this.router.navigate([STATES.EVENTS])
   }
 
   public goBack(): void {

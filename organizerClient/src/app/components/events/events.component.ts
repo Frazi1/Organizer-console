@@ -3,6 +3,7 @@ import {EventsService} from "../../services/events-service/events.service";
 import {Person} from "../../services/events-service/Model/Person";
 import {OrganizerEvent} from "../../services/events-service/Model/OrganizerEvent";
 import {Router} from "@angular/router";
+import {STATES} from "../../modules/routing/states";
 
 @Component({
   selector: 'app-events',
@@ -37,10 +38,9 @@ export class EventsComponent implements OnInit {
     this.event.eventType = "Birthday";
     this.eventsService.addEvent(this.event)
       .then(value => this.update());
-
   }
 
-  removeEvent(organizerEvent: OrganizerEvent){
+  removeEvent(organizerEvent: OrganizerEvent) {
     this.eventsService.removeEvent(organizerEvent)
       .then(value => this.update());
   }
@@ -49,11 +49,12 @@ export class EventsComponent implements OnInit {
     this.update();
   }
 
-  private update() {
-    this.eventsService.getEvents().then(events => this.events = events);
+  public goToEditPage(event: OrganizerEvent) {
+    this.router.navigate([STATES.EVENTS, event.id]);
   }
 
-  public goToEditPage(event: OrganizerEvent) {
-    this.router.navigate(['/event', event.id]);
+  private update() {
+    this.eventsService.getEvents()
+      .then(events => this.events = events);
   }
 }

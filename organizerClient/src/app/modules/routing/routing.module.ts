@@ -4,7 +4,7 @@ import {HeroDetailComponent} from "../../components/hero-detail/hero-detail.comp
 import {DashboardComponent} from "../../components/dashboard/dashboard.component";
 import {HeroesComponent} from "../../components/heroes/heroes.component";
 import {EventsComponent} from "../../components/events/events.component";
-import {EditMeetingEventComponent} from "../../components/edit-meeting-event/edit-meeting-event.component";
+import {EditMeetingEventComponent} from "../../components/edit-event/edit-event.component";
 import {STATES} from "./states";
 
 const routes = [{
@@ -17,7 +17,7 @@ const routes = [{
   },
   {
     path: '',
-    redirectTo: STATES.DASH_BOARD,
+    redirectTo: STATES.EVENTS,
     pathMatch: 'full'
   },
   {
@@ -29,7 +29,7 @@ const routes = [{
     component: EventsComponent
   },
   {
-    path: STATES.MEETING + '/:id',
+    path: STATES.EVENTS + '/:id',
     component: EditMeetingEventComponent
   }
 ];
