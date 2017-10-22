@@ -30,6 +30,10 @@ export class EditMeetingEventComponent implements OnInit {
 
   public updateEvent(): void {
     this.eventsService.updateMeeting(this.meetingEvent);
+    this.goBack();
+  }
+
+  public goBack(): void {
     this.location.back();
   }
 
