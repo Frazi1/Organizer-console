@@ -13,11 +13,18 @@ import {NgbDateStruct, NgbTimeStruct} from "@ng-bootstrap/ng-bootstrap";
 })
 export class EditMeetingEventComponent implements OnInit {
 
-  @Input()
-  public event: OrganizerEvent;
-
-  public dateModel: NgbDateStruct;
-  public timeModel: NgbTimeStruct;
+  @Input() public event: OrganizerEvent;
+  private now = new Date(Date.now());
+  @Input() public timeModel: NgbTimeStruct = {
+    minute: this.now.getMinutes(),
+    hour: this.now.getHours(),
+    second: this.now.getSeconds()
+  };
+  @Input() public dateModel: NgbDateStruct = {
+    day: this.now.getDay(),
+    month: this.now.getMonth(),
+    year: this.now.getFullYear()
+  };
 
   constructor(private eventsService: EventsService,
               private location: Location,
@@ -29,7 +36,6 @@ export class EditMeetingEventComponent implements OnInit {
     this.route.paramMap.switchMap((params: ParamMap) =>
       this.eventsService.getEvent(+params.get('id')))
       .subscribe(result => {
-        console.log(result);
         this.event = result
       });
   }

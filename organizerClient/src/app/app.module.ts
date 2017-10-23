@@ -15,6 +15,7 @@ import {EventsService} from "./services/events-service/events.service";
 import {ModelConverterService} from "./services/model-converter-service/model-converter-service.service";
 import {EditMeetingEventComponent} from './components/edit-event/edit-event.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {EditorEventComponent} from './components/editor-event/editor-event.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     HeroesComponent,
     DashboardComponent,
     EventsComponent,
-    EditMeetingEventComponent
+    EditMeetingEventComponent,
+    EditorEventComponent
   ],
   imports: [
     BrowserModule,
