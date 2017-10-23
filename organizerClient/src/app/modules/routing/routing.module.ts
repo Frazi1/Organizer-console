@@ -32,6 +32,11 @@ const routes = [{
     path: STATES.EVENTS + '/:id',
     component: EditMeetingEventComponent
   }
+  ,
+  {
+    path: STATES.EVENTS_CREATE,
+    component: EditMeetingEventComponent
+  }
 ];
 
 @NgModule({

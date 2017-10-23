@@ -57,4 +57,8 @@ export class EventsComponent implements OnInit {
     this.eventsService.getEvents()
       .then(events => this.events = events);
   }
+
+  public goToCreatePage() {
+    this.router.navigate([STATES.EVENTS_CREATE])
+  }
 }
