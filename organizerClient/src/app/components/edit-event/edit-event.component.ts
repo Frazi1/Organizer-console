@@ -5,6 +5,7 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {OrganizerEvent} from "../../services/events-service/Model/OrganizerEvent";
 import {STATES} from "../../modules/routing/states";
 import {NgbDateStruct, NgbTimeStruct} from "@ng-bootstrap/ng-bootstrap";
+import "rxjs/add/operator/switchMap";
 
 @Component({
   selector: 'app-edit-meeting-event',

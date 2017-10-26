@@ -8,7 +8,7 @@ import {Component, OnInit} from "@angular/core";
 })
 
 export class AppComponent implements OnInit{
-  title: String = "HEROES APP";
+  title: String = "Organizer APP";
   ngOnInit(): void {
   }
 }
