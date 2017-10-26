@@ -11,12 +11,14 @@ import {EventsService} from "./services/events-service/events.service";
 import {ModelConverterService} from "./services/model-converter-service/model-converter-service.service";
 import {EditMeetingEventComponent} from './components/edit-event/edit-event.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {EventEditorComponent} from '../partial/components/event-editor/event-editor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventsComponent,
-    EditMeetingEventComponent
+    EditMeetingEventComponent,
+    EventEditorComponent
   ],
   imports: [
     BrowserModule,

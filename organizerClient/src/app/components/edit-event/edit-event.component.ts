@@ -4,7 +4,6 @@ import {Location} from "@angular/common";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {OrganizerEvent} from "../../services/events-service/Model/OrganizerEvent";
 import {STATES} from "../../modules/routing/states";
-import {NgbDateStruct, NgbTimeStruct} from "@ng-bootstrap/ng-bootstrap";
 import "rxjs/add/operator/switchMap";
 
 @Component({
@@ -16,10 +15,6 @@ export class EditMeetingEventComponent implements OnInit {
 
   @Input()
   public event: OrganizerEvent;
-
-  public dateModel: NgbDateStruct;
-  public timeModel: NgbTimeStruct;
-
   constructor(private eventsService: EventsService,
               private location: Location,
               private route: ActivatedRoute,
@@ -36,11 +31,6 @@ export class EditMeetingEventComponent implements OnInit {
   }
 
   public updateEvent(): void {
-    this.event.date = new Date(this.dateModel.year,
-      this.dateModel.month - 1,
-      this.dateModel.day,
-      this.timeModel.hour,
-      this.timeModel.minute);
     this.eventsService.updateEvent(this.event);
     this.goToEvents();
   }

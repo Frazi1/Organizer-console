@@ -13,12 +13,11 @@ const routes = [
   {
     path: STATES.EVENTS,
     component: EventsComponent
-  }
-  // {
-  //   path: STATES.EVENTS + '/:id',
-  //   component: EditMeetingEventComponent
-  // }
-  ,
+  },
+  {
+    path: STATES.EVENTS + '/:id',
+    component: EditMeetingEventComponent
+  },
   {
     path: STATES.EVENTS_CREATE,
     component: EditMeetingEventComponent

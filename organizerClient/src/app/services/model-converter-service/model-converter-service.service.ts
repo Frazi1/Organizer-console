@@ -8,6 +8,7 @@ export class ModelConverterService {
   constructor() { }
 
   public getEvent(eventModel: OrganizerEventModel): OrganizerEvent {
+    let date = new Date(eventModel.date);
     return {
       id: eventModel.id,
       person: {
@@ -17,11 +18,25 @@ export class ModelConverterService {
       birthHour: eventModel.birthHour,
       present: eventModel.present,
       eventType: eventModel.eventType,
-      date: new Date(eventModel.date)
+      timeModel: {
+        hour: date.getHours(),
+        minute: date.getMinutes(),
+        second: date.getSeconds()
+      },
+      dateModel: {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDay()
+      }
     };
   }
 
   public getEventModel(event: OrganizerEvent) : OrganizerEventModel {
+    let date = new Date(event.dateModel.year,
+      event.dateModel.month - 1,
+      event.dateModel.day,
+      event.timeModel.hour,
+      event.timeModel.minute);
     return {
       id: event.id,
       person: {
@@ -31,7 +46,7 @@ export class ModelConverterService {
       birthHour: event.birthHour,
       present: event.present,
       eventType: event.eventType,
-      date: new Date(event.date).getTime()
+      date: date.getTime()
     };
   }
 
