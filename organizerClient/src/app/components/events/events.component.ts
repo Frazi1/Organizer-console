@@ -23,13 +23,6 @@ export class EventsComponent implements OnInit {
   constructor(private eventsService: EventsService,
               private router: Router) {
   }
-
-  addMeeting() {
-    this.event.eventType = "Birthday";
-    this.eventsService.addEvent(this.event)
-      .then(value => this.update());
-  }
-
   removeEvent(organizerEvent: OrganizerEvent) {
     this.eventsService.removeEvent(organizerEvent)
       .then(value => this.update());
@@ -39,7 +32,7 @@ export class EventsComponent implements OnInit {
     this.update();
   }
 
-  public goToEditPage(event: OrganizerEvent) {
+  public editEvent(event: OrganizerEvent) {
     this.router.navigate([STATES.EVENTS, event.id]);
   }
 

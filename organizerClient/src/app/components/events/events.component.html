@@ -1,32 +1,17 @@
 <div>
   <h2>Events</h2>
   <div>
-    <ul>
-      <li class="events-list" *ngFor="let event of events">
-        <div>
-          <span>{{event.id}}</span>
+    <mat-list>
+      <mat-list-item *ngFor="let event of events">
+        <div class="events-list-item">
           <span>{{event.person.name}}</span>
-          <span>{{event.description}}</span>
           <span>{{event.getDate() | date: 'dd/MM/yyyy - HH:mm'}}</span>
         </div>
-        <div>
-          <button (click)="removeEvent(event)">Remove</button>
-          <button (click)="goToEditPage(event)">Edit</button>
+        <div class="hover-icons">
+          <i (click)="editEvent(event)" class="material-icons icon-edit">mode_edit</i>
+          <i (click)="removeEvent(event)" class="material-icons icon-delete">delete</i>
         </div>
-      </li>
-    </ul>
-  </div>
-  <div>
-    <h2>ADD MEETING</h2>
-    <label>name: </label>
-    <label>
-      <input [(ngModel)]="event.person.name"/>
-    </label>
-
-    <label>description: </label>
-    <label>
-      <input [(ngModel)]="event.description">
-    </label>
-    <button (click)="addMeeting()">Add</button>
+      </mat-list-item>
+    </mat-list>
   </div>
 </div>

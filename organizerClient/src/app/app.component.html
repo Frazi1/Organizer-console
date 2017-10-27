@@ -1,17 +1,18 @@
 <h1>{{title}}</h1>
-<div class="body-container">
-  <nav>
+<div class="scroll-fix">
+  <div class="body-container">
+    <nav>
     <span>
       <a routerLink="/events">Events</a>
     </span>
-    <span>
+      <span>
       <a routerLink="/events/add">Add</a>
     </span>
-  </nav>
-  <div class="center-content-container">
-    <router-outlet></router-outlet>
-  </div>
-  <div class="right-content-container">
-
+    </nav>
+    <div class="center-content-container">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="right-content-container">
+    </div>
   </div>
 </div>

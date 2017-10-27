@@ -1,3 +1,25 @@
-.events-list li {
-  margin: 0 5px;
+mat-list-item {
+  display: flex;
 }
+
+.hover-icons {
+  flex-shrink: 0;
+  flex-grow: 0;
+  visibility: hidden;
+}
+
+.hover-icons i {
+  cursor: pointer;
+}
+
+mat-list-item:hover .hover-icons {
+  visibility: visible;
+}
+
+.events-list-item {
+  flex-grow: 1;
+}
+
+
+
+
