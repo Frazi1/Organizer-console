@@ -31,8 +31,9 @@ export class EditMeetingEventComponent implements OnInit {
   }
 
   public updateEvent(): void {
-    this.eventsService.updateEvent(this.event);
-    this.goToEvents();
+    this.eventsService.updateEvent(this.event)
+      // .then(value => this.goToEvents());
+      .then(value => this.goBack());
   }
 
   public goToEvents(): void {
@@ -41,8 +42,5 @@ export class EditMeetingEventComponent implements OnInit {
 
   public goBack(): void {
     this.location.back();
-    // console.log(this.dateModel);
-    // console.log(this.timeModel);
   }
-
 }

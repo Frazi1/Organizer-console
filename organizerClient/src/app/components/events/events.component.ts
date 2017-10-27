@@ -15,20 +15,10 @@ export class EventsComponent implements OnInit {
   public events: OrganizerEvent[];
 
   @Input()
-  public person: Person = new Person;
+  public person: Person = Person.getEmptyPerson();
 
   @Input()
-  public event: OrganizerEvent = {
-    id: null,
-    person: {
-      name: ""
-    },
-    description: "",
-    date: new Date(Date.now()),
-    birthHour: null,
-    present: "",
-    eventType: "null"
-  };
+  public event: OrganizerEvent = OrganizerEvent.getEmptyEvent();
 
   constructor(private eventsService: EventsService,
               private router: Router) {
@@ -55,7 +45,8 @@ export class EventsComponent implements OnInit {
 
   private update() {
     this.eventsService.getEvents()
-      .then(events => this.events = events);
+      .then(events => this.events = events)
+      .then(value => console.log(this.events[0].getDate()));
   }
 
   public goToCreatePage() {

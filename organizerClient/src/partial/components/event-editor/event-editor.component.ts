@@ -11,11 +11,7 @@ export class EventEditorComponent implements OnInit {
 
   @Input() public event: OrganizerEvent;
   @Output() public eventChange: EventEmitter<OrganizerEvent> = new EventEmitter();
-  public dateModel: NgbDateStruct;
-  public timeModel: NgbTimeStruct;
-
-
-  constructor() { }
+  public constructor() { }
 
   ngOnInit() {
   }
