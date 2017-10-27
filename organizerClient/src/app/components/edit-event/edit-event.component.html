@@ -3,8 +3,10 @@
     <h1>Edit {{event.eventType}}:</h1>
     <app-event-editor [(event)]="event"></app-event-editor>
     <div class="buttons-container">
-      <button class="ok-button" mat-raised-button color="primary"
+      <button *ngIf="isEdit" class="ok-button" mat-raised-button color="primary"
               (click)="updateEvent()">OK</button>
+      <button *ngIf="!isEdit" class="ok-button" mat-raised-button color="primary"
+              (click)="addEvent()">OK</button>
       <button class="back-button" mat-raised-button color="warn"
               (click)="goBack()">Go back</button>
     </div>

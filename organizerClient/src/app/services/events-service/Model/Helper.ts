@@ -27,10 +27,10 @@ export class Helper {
   }
 
   public static getEmptyDateStruct(): NgbDateStruct {
-    return {year: -1, month: -1, day: -1}
+    return {year: null, month: null, day: null}
   }
 
   public static getEmptyTimeStruct(): NgbTimeStruct {
-    return { hour: -1, minute: -1, second: -1 }
+    return { hour: null, minute: null, second: null }
   }
 }

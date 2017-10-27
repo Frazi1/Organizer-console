@@ -48,8 +48,4 @@ export class EventsComponent implements OnInit {
       .then(events => this.events = events)
       .then(value => console.log(this.events[0].getDate()));
   }
-
-  public goToCreatePage() {
-    this.router.navigate([STATES.EVENTS_CREATE])
-  }
 }

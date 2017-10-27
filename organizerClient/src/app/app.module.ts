@@ -20,7 +20,7 @@ import {MaterialModule} from "./modules/material/material.module";
     AppComponent,
     EventsComponent,
     EditMeetingEventComponent,
-    EventEditorComponent
+    EventEditorComponent,
   ],
   imports: [
     BrowserModule,

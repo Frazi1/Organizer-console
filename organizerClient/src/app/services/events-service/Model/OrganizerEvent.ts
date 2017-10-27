@@ -24,7 +24,7 @@ export class OrganizerEvent extends OrganizerEventBase {
 
 
   public static getEmptyEvent(): OrganizerEvent {
-    return new OrganizerEvent(null, "", Person.getEmptyPerson(), "", -1, "", Helper.getEmptyDateStruct(), Helper.getEmptyTimeStruct())
+    return new OrganizerEvent(null, "Birthday", Person.getEmptyPerson(), "", -1, "", Helper.getEmptyDateStruct(), Helper.getEmptyTimeStruct())
   }
 
   public getDate(): Date {

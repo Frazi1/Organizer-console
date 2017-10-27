@@ -1,5 +1,15 @@
 <div class="event-editor-container">
   <mat-form-field>
+    <mat-select  placeholder="Type" [(ngModel)]="event.eventType">
+      <mat-option  [value]="'Birthday'" >
+        Birthday
+      </mat-option>
+      <mat-option [value]="'Meeting'" >
+        Meeting
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
     <input matInput [(ngModel)]="event.person.name" placeholder="Name">
   </mat-form-field>
   <mat-form-field>

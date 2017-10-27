@@ -15,11 +15,11 @@ const routes = [
     component: EventsComponent
   },
   {
-    path: STATES.EVENTS + '/:id',
+    path: STATES.EVENTS_ADD,
     component: EditMeetingEventComponent
   },
   {
-    path: STATES.EVENTS_CREATE,
+    path: STATES.EVENTS + '/:id',
     component: EditMeetingEventComponent
   }
 ];
