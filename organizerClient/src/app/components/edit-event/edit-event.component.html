@@ -1,10 +1,12 @@
 <div>
-  <h1>Edit Meeting:</h1>
   <div *ngIf="event">
+    <h1>Edit {{event.eventType}}:</h1>
     <app-event-editor [(event)]="event"></app-event-editor>
-    <div>
-      <button (click)="updateEvent()">Save</button>
-      <button (click)="goBack()">Back</button>
+    <div class="buttons-container">
+      <button class="ok-button" mat-raised-button color="primary"
+              (click)="updateEvent()">OK</button>
+      <button class="back-button" mat-raised-button color="warn"
+              (click)="goBack()">Go back</button>
     </div>
   </div>
 </div>

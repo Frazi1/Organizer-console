@@ -1,3 +1,19 @@
 .date-time-block {
   display: inline-block;
 }
+
+.buttons-container {
+  display: flex;
+  margin: 4px 0;
+}
+
+.ok-button {
+  margin-right: 5px;
+  flex-grow: 3;
+}
+
+.back-button {
+  margin-left: 5px;
+  flex-grow: 1;
+}
+

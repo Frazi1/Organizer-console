@@ -2,8 +2,6 @@ import {Injectable} from '@angular/core';
 import {OrganizerEventModel} from "../events-service/Model/OrganizerEventModel";
 import {OrganizerEvent} from "../events-service/Model/OrganizerEvent";
 import {Person} from "../events-service/Model/Person";
-import {NgbTimeStruct} from "@ng-bootstrap/ng-bootstrap";
-import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 import {Helper} from "../events-service/Model/Helper";
 
 @Injectable()

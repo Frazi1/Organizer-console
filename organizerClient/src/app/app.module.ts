@@ -12,6 +12,8 @@ import {ModelConverterService} from "./services/model-converter-service/model-co
 import {EditMeetingEventComponent} from './components/edit-event/edit-event.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {EventEditorComponent} from '../partial/components/event-editor/event-editor.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MaterialModule} from "./modules/material/material.module";
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import {EventEditorComponent} from '../partial/components/event-editor/event-edi
     FormsModule,
     RoutingModule,
     HttpModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     EventsService,
