@@ -1,17 +1,28 @@
 <div>
   <h2>Events</h2>
   <div>
-    <mat-list>
-      <mat-list-item *ngFor="let event of events">
-        <div class="events-list-item">
-          <span>{{event.person.name}}</span>
-          <span>{{event.getDate() | date: 'dd/MM/yyyy - HH:mm'}}</span>
-        </div>
-        <div class="hover-icons">
-          <i (click)="editEvent(event)" class="material-icons icon-edit">mode_edit</i>
-          <i (click)="removeEvent(event)" class="material-icons icon-delete">delete</i>
-        </div>
-      </mat-list-item>
-    </mat-list>
+    <!--<mat-list>-->
+      <!--<mat-list-item *ngFor="let item of events">-->
+        <mat-expansion-panel class="events-container events-expansion-panel"
+                             *ngFor="let item of events">
+          <mat-expansion-panel-header class="events-container-header">
+            <div class="events-list-item">
+              <span>{{item.person.name}}</span>
+              <span>{{item.getDate() | date: 'dd/MM/yyyy - HH:mm'}}</span>
+            </div>
+            <div class="hover-icons">
+              <i (click)="editEvent($event,item)"
+                 class="material-icons icon-edit">mode_edit</i>
+              <i (click)="removeEvent($event, item)"
+                 class="material-icons icon-delete">delete</i>
+            </div>
+          </mat-expansion-panel-header>
+          <div>
+            <span>{{item.description}}</span>
+            <span>{{item.present}}</span>
+          </div>
+        </mat-expansion-panel>
+      <!--</mat-list-item>-->
+    <!--</mat-list>-->
   </div>
 </div>

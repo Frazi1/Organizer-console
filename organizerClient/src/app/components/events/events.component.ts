@@ -23,7 +23,8 @@ export class EventsComponent implements OnInit {
   constructor(private eventsService: EventsService,
               private router: Router) {
   }
-  removeEvent(organizerEvent: OrganizerEvent) {
+  removeEvent(event,organizerEvent: OrganizerEvent) {
+    event.stopPropagation();
     this.eventsService.removeEvent(organizerEvent)
       .then(value => this.update());
   }
@@ -32,8 +33,9 @@ export class EventsComponent implements OnInit {
     this.update();
   }
 
-  public editEvent(event: OrganizerEvent) {
-    this.router.navigate([STATES.EVENTS, event.id]);
+  public editEvent(event, organizerEvent: OrganizerEvent) {
+    event.stopPropagation();
+    this.router.navigate([STATES.EVENTS, organizerEvent.id]);
   }
 
   private update() {
