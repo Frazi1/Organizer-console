@@ -8,7 +8,7 @@ import "rxjs/add/operator/switchMap";
 @Component({
   selector: 'app-edit-meeting-event',
   templateUrl: './edit-event.component.html',
-  styleUrls: ['./edit-event.component.css']
+  styleUrls: ['./edit-event.component.scss']
 })
 export class EditMeetingEventComponent implements OnInit {
 
