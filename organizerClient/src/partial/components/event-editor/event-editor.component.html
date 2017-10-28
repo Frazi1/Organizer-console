@@ -1,0 +1,25 @@
+<div class="event-editor-container">
+  <mat-form-field>
+    <mat-select  placeholder="Type" [(ngModel)]="event.eventType">
+      <mat-option  [value]="'Birthday'" >
+        Birthday
+      </mat-option>
+      <mat-option [value]="'Meeting'" >
+        Meeting
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="event.person.name" placeholder="Name">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput [(ngModel)]="event.description" placeholder="Description"></textarea>
+  </mat-form-field>
+  <mat-form-field *ngIf="event.eventType == 'Birthday'">
+    <input matInput [(ngModel)]="event.present" placeholder="Present">
+  </mat-form-field>
+  <div class="date-time-block">
+    <ngb-datepicker class="date-time-block" [(ngModel)]="event.dateModel"></ngb-datepicker>
+    <ngb-timepicker class="date-time-block" [(ngModel)]="event.timeModel" [spinners]="false"></ngb-timepicker>
+  </div>
+</div>

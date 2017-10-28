@@ -1,0 +1,37 @@
+mat-list-item {
+  display: flex;
+
+  div.mat-list-item-content {
+    padding: 0;
+  }
+}
+
+.events-container {
+  .hover-icons {
+    flex-shrink: 0;
+    flex-grow: 0;
+    visibility: hidden;
+    margin-right: 10px;
+
+    i {
+      color: #999999;
+      cursor: pointer;
+    }
+
+    i:hover{
+      color: black;
+    }
+  }
+  :hover {
+    .hover-icons {
+      visibility: visible;
+    }
+  }
+}
+.events-list-item {
+  flex-grow: 1;
+}
+
+.events-expansion-panel {
+  width: 100%;
+}

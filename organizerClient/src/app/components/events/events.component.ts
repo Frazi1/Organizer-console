@@ -8,39 +8,23 @@ import {STATES} from "../../modules/routing/states";
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.css']
+  styleUrls: ['./events.component.scss']
 })
 export class EventsComponent implements OnInit {
 
   public events: OrganizerEvent[];
 
   @Input()
-  public person: Person = new Person;
+  public person: Person = Person.getEmptyPerson();
 
   @Input()
-  public event: OrganizerEvent = {
-    id: null,
-    person: {
-      name: ""
-    },
-    description: "",
-    date: new Date(Date.now()),
-    birthHour: null,
-    present: "",
-    eventType: "null"
-  };
+  public event: OrganizerEvent = OrganizerEvent.getEmptyEvent();
 
   constructor(private eventsService: EventsService,
               private router: Router) {
   }
-
-  addMeeting() {
-    this.event.eventType = "Birthday";
-    this.eventsService.addEvent(this.event)
-      .then(value => this.update());
-  }
-
-  removeEvent(organizerEvent: OrganizerEvent) {
+  removeEvent(event,organizerEvent: OrganizerEvent) {
+    event.stopPropagation();
     this.eventsService.removeEvent(organizerEvent)
       .then(value => this.update());
   }
@@ -49,16 +33,14 @@ export class EventsComponent implements OnInit {
     this.update();
   }
 
-  public goToEditPage(event: OrganizerEvent) {
-    this.router.navigate([STATES.EVENTS, event.id]);
+  public editEvent(event, organizerEvent: OrganizerEvent) {
+    event.stopPropagation();
+    this.router.navigate([STATES.EVENTS, organizerEvent.id]);
   }
 
   private update() {
     this.eventsService.getEvents()
-      .then(events => this.events = events);
-  }
-
-  public goToCreatePage() {
-    this.router.navigate([STATES.EVENTS_CREATE])
+      .then(events => this.events = events)
+      .then(value => console.log(this.events[0].getDate()));
   }
 }

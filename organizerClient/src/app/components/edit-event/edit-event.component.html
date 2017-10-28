@@ -1,21 +1,14 @@
 <div>
-  <h1>Edit Meeting:</h1>
   <div *ngIf="event">
-    <div>
-      <label>Person name:</label>
-      <input [(ngModel)]="event.person.name">
-    </div>
-    <div>
-      <label>Description:</label>
-      <input [(ngModel)]="event.description">
-    </div>
-    <div class="date-time-block">
-      <ngb-datepicker class="date-time-block" [(ngModel)]="dateModel"></ngb-datepicker>
-      <ngb-timepicker class="date-time-block" [(ngModel)]="timeModel" [spinners]="false"></ngb-timepicker>
-    </div>
-    <div>
-      <button (click)="updateEvent()">Save</button>
-      <button (click)="goBack()">Back</button>
+    <h1>Edit {{event.eventType}}:</h1>
+    <app-event-editor [(event)]="event"></app-event-editor>
+    <div class="buttons-container">
+      <button *ngIf="isEdit" class="ok-button" mat-raised-button color="primary"
+              (click)="updateEvent()">OK</button>
+      <button *ngIf="!isEdit" class="ok-button" mat-raised-button color="primary"
+              (click)="addEvent()">OK</button>
+      <button class="back-button" mat-raised-button color="warn"
+              (click)="goBack()">Go back</button>
     </div>
   </div>
 </div>

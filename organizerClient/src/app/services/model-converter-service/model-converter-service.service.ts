@@ -1,48 +1,40 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {OrganizerEventModel} from "../events-service/Model/OrganizerEventModel";
 import {OrganizerEvent} from "../events-service/Model/OrganizerEvent";
+import {Person} from "../events-service/Model/Person";
+import {Helper} from "../events-service/Model/Helper";
 
 @Injectable()
 export class ModelConverterService {
 
-  constructor() { }
+  constructor() {
+  }
 
   public getEvent(eventModel: OrganizerEventModel): OrganizerEvent {
-    return {
-      id: eventModel.id,
-      person: {
-        name: eventModel.person.name
-      },
-      description: eventModel.description,
-      birthHour: eventModel.birthHour,
-      present: eventModel.present,
-      eventType: eventModel.eventType,
-      date: new Date(eventModel.date)
-    };
+    let date = new Date(eventModel.date);
+    return new OrganizerEvent(eventModel.id,
+    eventModel.eventType,
+    new Person(eventModel.person.name),
+    eventModel.description, eventModel.birthHour,
+    eventModel.present,
+    Helper.getDateStructFromDate(date),
+    Helper.getTimeStructFromDate(date));
   }
 
-  public getEventModel(event: OrganizerEvent) : OrganizerEventModel {
-    return {
-      id: event.id,
-      person: {
-        name: event.person.name
-      },
-      description: event.description,
-      birthHour: event.birthHour,
-      present: event.present,
-      eventType: event.eventType,
-      date: new Date(event.date).getTime()
-    };
+  public getEventModel(event: OrganizerEvent): OrganizerEventModel {
+    let date = Helper.getDateFromDateTimeStructs(event.dateModel, event.timeModel);
+    return new OrganizerEventModel(event.id, event.eventType, new Person(event.person.name,), event.description,
+      event.birthHour, event.present, date.getTime());
   }
 
-  public getEventArray(meetingEventModels: OrganizerEventModel[]) : OrganizerEvent[] {
-    let meetingEvents : OrganizerEvent[] = [];
+  public getEventArray(meetingEventModels: OrganizerEventModel[]): OrganizerEvent[] {
+    let meetingEvents: OrganizerEvent[] = [];
     meetingEventModels.forEach(value => meetingEvents.push(this.getEvent(value)));
     return meetingEvents;
   }
 
-  public getEventModelsArray(events: OrganizerEvent[]) : OrganizerEventModel[] {
-    let eventsModels : OrganizerEventModel[] = [];
+  public getEventModelsArray(events: OrganizerEvent[]): OrganizerEventModel[] {
+    let eventsModels: OrganizerEventModel[] = [];
     events.forEach(value => eventsModels.push(this.getEventModel(value)));
     return eventsModels;
   }
