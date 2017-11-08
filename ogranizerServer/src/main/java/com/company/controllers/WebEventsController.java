@@ -56,6 +56,7 @@ public class WebEventsController {
         savedEvent.setDate(event.getDate());
         savedEvent.setBirthHour(event.getBirthHour());
         savedEvent.setPresent(event.getPresent());
+        savedEvent.setEventType(event.getEventType());
         this.dbEventsRepository.save(savedEvent);
         return ResponseEntity.ok(savedEvent);
     }
