@@ -4,19 +4,32 @@ import com.company.models.Person;
 
 import javax.persistence.*;
 
-@Entity
+
+@Entity(name = "Event")
 public class Event {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id")
     private Integer id;
+
+    @Column(name = "Date")
     private Long date;
+
+    @Column(name = "Description")
     private String description;
+
+    @Column(name = "Present")
     private String present;
+
+    @Column(name = "BirthTime")
     private int birthHour;
+
+    @Column(name = "EventType")
     private EventType eventType;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
+    @JoinColumn(name = "PersonId")
     private Person person;
 
     public Event() {
@@ -30,12 +43,12 @@ public class Event {
         this.id = id;
     }
 
-    public void setDate(Long date) {
-        this.date = date;
-    }
-
     public Long getDate() {
         return date;
+    }
+
+    public void setDate(Long date) {
+        this.date = date;
     }
 
     public String getDescription() {
@@ -80,31 +93,15 @@ public class Event {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (!(o instanceof Event)) return false;
-
         Event event = (Event) o;
-
-        if (getBirthHour() != event.getBirthHour()) return false;
-        if (!getId().equals(event.getId())) return false;
-        if (getDate() != null ? !getDate().equals(event.getDate()) : event.getDate() != null) return false;
-        if (getDescription() != null ? !getDescription().equals(event.getDescription()) : event.getDescription() != null)
-            return false;
-        if (getPresent() != null ? !getPresent().equals(event.getPresent()) : event.getPresent() != null) return false;
-        return getPerson() != null ? getPerson().equals(event.getPerson()) : event.getPerson() == null;
+        return event.getId() == this.getId();
     }
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + (getDate() != null ? getDate().hashCode() : 0);
-        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
-        result = 31 * result + (getPresent() != null ? getPresent().hashCode() : 0);
-        result = 31 * result + getBirthHour();
-        result = 31 * result + (getPerson() != null ? getPerson().hashCode() : 0);
-        return result;
+        return getId().hashCode();
     }
-
 
     @Override
     public String toString() {
@@ -114,7 +111,7 @@ public class Event {
         sb.append(", description='").append(description).append('\'');
         sb.append(", present='").append(present).append('\'');
         sb.append(", birthHour=").append(birthHour);
-        sb.append(", person=").append(person);
+//        sb.append(", person=").append(person);
         sb.append('}');
         return sb.toString();
     }

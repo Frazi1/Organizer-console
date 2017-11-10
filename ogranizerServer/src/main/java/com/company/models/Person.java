@@ -1,17 +1,24 @@
 package com.company.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.company.models.events.Event;
+
+import javax.persistence.*;
 
 @Entity
+@Table(name = "Person")
 public class Person {
-    private String name;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id")
+    private int id;
+
+    @Column(name = "Name")
+    private String name;
+
+    @OneToOne()
+    @JoinColumn(name = "EventId")
+    private Event event;
 
     public Person() {
     }
