@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Http} from "@angular/http";
-import "rxjs/add/operator/toPromise";
-import {ModelConverterService} from "../model-converter-service/model-converter-service.service";
-import {OrganizerEvent} from "./Model/OrganizerEvent";
-import {OrganizerEventModel} from "./Model/OrganizerEventModel";
+import {Http} from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+import {ModelConverterService} from '../model-converter-service/model-converter-service.service';
+import {OrganizerEvent} from './Model/OrganizerEvent';
+import {OrganizerEventModel} from './Model/OrganizerEventModel';
 
-const END_POINT = 'http://localhost:8080/'
+const END_POINT = 'http://localhost:8080/';
 const EVENTS_URL = END_POINT + 'api/events/';
 
 @Injectable()
@@ -39,10 +39,10 @@ export class EventsService {
         console.log(response.json());
         return response.json();
       })
-      .catch(this.handleError)
+      .catch(this.handleError);
   }
 
-  public removeEvent(event: OrganizerEvent) : Promise<OrganizerEvent> {
+  public removeEvent(event: OrganizerEvent): Promise<OrganizerEvent> {
     return this.http.delete(EVENTS_URL + event.id)
       .toPromise()
       .catch(this.handleError);
@@ -56,6 +56,6 @@ export class EventsService {
 
   private handleError(error: any): Promise<any> {
     console.error('Error occured: ', error);
-    return Promise.reject(error.message | error);
+    return Promise.reject(error.message || error);
   }
 }

@@ -1,7 +1,7 @@
-import {OrganizerEventBase} from "./OrganizerEventBase";
-import {NgbDateStruct, NgbTimeStruct} from "@ng-bootstrap/ng-bootstrap";
-import {Person} from "./Person";
-import {Helper} from "./Helper";
+import {OrganizerEventBase} from './OrganizerEventBase';
+import {NgbDateStruct, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
+import {Person} from './Person';
+import {Helper} from './Helper';
 
 
 export class OrganizerEvent extends OrganizerEventBase {
@@ -24,7 +24,8 @@ export class OrganizerEvent extends OrganizerEventBase {
 
 
   public static getEmptyEvent(): OrganizerEvent {
-    return new OrganizerEvent(null, "Birthday", Person.getEmptyPerson(), "", -1, "", Helper.getEmptyDateStruct(), Helper.getEmptyTimeStruct())
+    return new OrganizerEvent(null, 'Birthday', Person.getEmptyPerson(), '', -1,
+    '', Helper.getEmptyDateStruct(), Helper.getEmptyTimeStruct());
   }
 
   public getDate(): Date {
