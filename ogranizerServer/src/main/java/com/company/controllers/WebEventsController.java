@@ -27,8 +27,8 @@ public class WebEventsController {
     }
 
     @RequestMapping( method = RequestMethod.POST)
-    @Cascade(CascadeType.ALL)
     public ResponseEntity<?> addEvent(@RequestBody Event event){
+        this.dbPersonRepository.save(event.getPerson());
         this.dbEventsRepository.save(event);
         return ResponseEntity.accepted().body(event);
     }

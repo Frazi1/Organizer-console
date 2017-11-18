@@ -17,7 +17,6 @@ public class Person {
     private String name;
 
     @OneToOne()
-    @JoinColumn(name = "EventId")
     private Event event;
 
     public Person() {
