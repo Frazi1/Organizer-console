@@ -8,6 +8,7 @@ import com.company.repositories.DbPersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -50,7 +51,8 @@ public class EventsService {
         Event savedEvent  = this.dbEventsRepository.findOne(id);
         savedEvent.setDescription(eventDTO.getDescription());
         savedEvent.getPerson().setName(eventDTO.getPerson().getName());
-        savedEvent.setDate(eventDTO.getDate());
+        Date date = new Date(eventDTO.getDate());
+        savedEvent.setDate(date);
         savedEvent.setBirthHour(eventDTO.getBirthHour());
         savedEvent.setPresent(eventDTO.getPresent());
         savedEvent.setEventType(eventDTO.getEventType());

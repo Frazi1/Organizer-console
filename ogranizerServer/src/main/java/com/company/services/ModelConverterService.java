@@ -6,6 +6,8 @@ import com.company.models.dto.PersonDTO;
 import com.company.models.events.Event;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service()
 public class ModelConverterService {
 
@@ -25,7 +27,7 @@ public class ModelConverterService {
         Event event = new Event();
         event.setId(eventDTO.getId());
         event.setBirthHour(eventDTO.getBirthHour());
-        event.setDate(eventDTO.getDate());
+        event.setDate(convertLongToSqlDate(eventDTO.getDate()));
         event.setDescription(eventDTO.getDescription());
         event.setEventType(eventDTO.getEventType());
         event.setPerson(getPersonFromPersonDTO(eventDTO.getPerson()));
@@ -37,11 +39,19 @@ public class ModelConverterService {
         EventDTO eventDTO = new EventDTO();
         eventDTO.setId(event.getId());
         eventDTO.setBirthHour(event.getBirthHour());
-        eventDTO.setDate(event.getDate());
+        eventDTO.setDate(convertSqlDateToLong(event.getDate()));
         eventDTO.setDescription(event.getDescription());
         eventDTO.setEventType(event.getEventType());
         eventDTO.setPerson(getPersonDTOFromPerson(event.getPerson()));
         eventDTO.setPresent(event.getPresent());
         return eventDTO;
+    }
+
+    public java.util.Date convertLongToSqlDate(Long dateLong){
+        return new java.util.Date(dateLong);
+    }
+
+    public Long convertSqlDateToLong(Date date){
+        return date.getTime();
     }
 }

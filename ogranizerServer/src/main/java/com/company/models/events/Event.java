@@ -3,6 +3,7 @@ package com.company.models.events;
 import com.company.models.Person;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity(name = "Event")
@@ -14,7 +15,8 @@ public class Event {
     private Integer id;
 
     @Column(name = "Date")
-    private Long date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
 
     @Column(name = "Description")
     private String description;
@@ -43,13 +45,6 @@ public class Event {
         this.id = id;
     }
 
-    public Long getDate() {
-        return date;
-    }
-
-    public void setDate(Long date) {
-        this.date = date;
-    }
 
     public String getDescription() {
         return description;
@@ -91,28 +86,22 @@ public class Event {
         this.eventType = eventType;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Event)) return false;
         Event event = (Event) o;
         return event.getId() == this.getId();
     }
-
     @Override
     public int hashCode() {
         return getId().hashCode();
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("Event{");
-        sb.append("id=").append(id);
-        sb.append(", date=").append(date);
-        sb.append(", description='").append(description).append('\'');
-        sb.append(", present='").append(present).append('\'');
-        sb.append(", birthHour=").append(birthHour);
-//        sb.append(", person=").append(person);
-        sb.append('}');
-        return sb.toString();
     }
 }
