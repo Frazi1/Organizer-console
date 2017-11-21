@@ -25,7 +25,8 @@ public class Event {
     private String present;
 
     @Column(name = "BirthTime")
-    private int birthHour;
+    @Temporal(TemporalType.TIME)
+    private Date birthHour;
 
     @Column(name = "EventType")
     private String eventType;
@@ -70,11 +71,11 @@ public class Event {
         this.present = present;
     }
 
-    public int getBirthHour() {
+    public Date getBirthHour() {
         return birthHour;
     }
 
-    public void setBirthHour(int birthHour) {
+    public void setBirthHour(Date birthHour) {
         this.birthHour = birthHour;
     }
 

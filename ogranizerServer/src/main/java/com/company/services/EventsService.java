@@ -49,6 +49,9 @@ public class EventsService {
 
     public EventDTO updateEventById(EventDTO eventDTO, Integer id){
         Event savedEvent  = this.dbEventsRepository.findOne(id);
+        if(savedEvent == null){
+            return null;
+        }
         savedEvent.setDescription(eventDTO.getDescription());
         savedEvent.getPerson().setName(eventDTO.getPerson().getName());
         Date date = new Date(eventDTO.getDate());

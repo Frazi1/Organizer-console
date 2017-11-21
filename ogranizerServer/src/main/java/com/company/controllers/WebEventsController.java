@@ -57,6 +57,9 @@ public class WebEventsController {
             return ResponseEntity.badRequest().build();
         }
         EventDTO result = eventsService.updateEventById(eventDTO, id);
+        if(result == null){
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.ok(result);
     }
 }

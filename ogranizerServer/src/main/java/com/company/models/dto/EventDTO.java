@@ -1,6 +1,9 @@
 package com.company.models.dto;
 
 import com.company.models.events.EventType;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
 
 public class EventDTO {
 
@@ -10,7 +13,9 @@ public class EventDTO {
     private PersonDTO person;
     private EventType eventType;
     //convert to time
-    private int birthHour;
+    @JsonFormat(shape = JsonFormat.Shape.STRING,
+                pattern = "hh:mm:ss")
+    private Date birthHour;
     private Long date;
 
     public EventDTO(){
@@ -48,11 +53,11 @@ public class EventDTO {
         this.eventType = eventType;
     }
 
-    public int getBirthHour() {
+    public Date getBirthHour() {
         return birthHour;
     }
 
-    public void setBirthHour(int birthHour) {
+    public void setBirthHour(Date birthHour) {
         this.birthHour = birthHour;
     }
 
