@@ -23,6 +23,10 @@ public class WebEventsController {
 
     @RequestMapping( method = RequestMethod.POST)
     public ResponseEntity<?> addEvent(@RequestBody EventDTO eventDTO){
+        if(eventDTO.getPerson() == null
+                || eventDTO.getEventType() == null){
+            return ResponseEntity.badRequest().build();
+        }
         eventsService.addEvent(eventDTO);
         return ResponseEntity.accepted().body(eventDTO);
     }
@@ -38,12 +42,20 @@ public class WebEventsController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> removeEvent(@PathVariable Integer id) {
+        if(id == null){
+            return ResponseEntity.badRequest().build();
+        }
         eventsService.removeEventById(id);
         return ResponseEntity.ok().build();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateEvent(@RequestBody EventDTO eventDTO,@PathVariable Integer id) {
+    public ResponseEntity<?> updateEvent(@RequestBody EventDTO eventDTO, @PathVariable Integer id) {
+        if(id == null
+                || eventDTO.getPerson() == null
+                || eventDTO.getEventType() == null){
+            return ResponseEntity.badRequest().build();
+        }
         EventDTO result = eventsService.updateEventById(eventDTO, id);
         return ResponseEntity.ok(result);
     }

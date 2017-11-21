@@ -28,7 +28,7 @@ public class EventsService {
     }
 
     public void addEvent(EventDTO eventDTO) {
-        Event event = modelConverterService.getEventFromEventDTO(eventDTO);
+        Event event = modelConverterService.convertDtoToEvent(eventDTO);
         Person person = event.getPerson();
         dbPersonRepository.save(person);
         dbEventsRepository.save(event);
@@ -36,11 +36,11 @@ public class EventsService {
 
     public Iterable<EventDTO> getEvents(){
         return StreamSupport.stream(dbEventsRepository.findAll().spliterator(), false)
-                .map(modelConverterService::getEventDTOFromEvent).collect(Collectors.toList());
+                .map(modelConverterService::convertEventToDto).collect(Collectors.toList());
     }
 
     public EventDTO getEventById(Integer id) {
-        return modelConverterService.getEventDTOFromEvent(dbEventsRepository.findOne(id));
+        return modelConverterService.convertEventToDto(dbEventsRepository.findOne(id));
     }
 
     public void removeEventById(Integer id) {
@@ -55,8 +55,9 @@ public class EventsService {
         savedEvent.setDate(date);
         savedEvent.setBirthHour(eventDTO.getBirthHour());
         savedEvent.setPresent(eventDTO.getPresent());
-        savedEvent.setEventType(eventDTO.getEventType());
+        savedEvent.setEventType(
+                modelConverterService.convertEventTypeToString(eventDTO.getEventType()));
         this.dbEventsRepository.save(savedEvent);
-        return modelConverterService.getEventDTOFromEvent(savedEvent);
+        return modelConverterService.convertEventToDto(savedEvent);
     }
 }

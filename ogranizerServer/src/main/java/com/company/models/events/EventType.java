@@ -1,6 +1,16 @@
 package com.company.models.events;
 
 public enum EventType {
-    Meeting,
-    Birthday
+    Meeting {
+        @Override
+        public String toString() {
+            return "Meeting";
+        }
+    },
+    Birthday {
+        @Override
+        public String toString() {
+            return "Birthday";
+        }
+    }
 }

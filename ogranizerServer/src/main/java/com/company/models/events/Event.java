@@ -28,7 +28,7 @@ public class Event {
     private int birthHour;
 
     @Column(name = "EventType")
-    private EventType eventType;
+    private String eventType;
 
     @OneToOne()
     @JoinColumn(name = "PersonId")
@@ -78,11 +78,11 @@ public class Event {
         this.birthHour = birthHour;
     }
 
-    public EventType getEventType() {
+    public String  getEventType() {
         return eventType;
     }
 
-    public void setEventType(EventType eventType) {
+    public void setEventType(String eventType) {
         this.eventType = eventType;
     }
 
@@ -100,6 +100,7 @@ public class Event {
         Event event = (Event) o;
         return event.getId() == this.getId();
     }
+
     @Override
     public int hashCode() {
         return getId().hashCode();
